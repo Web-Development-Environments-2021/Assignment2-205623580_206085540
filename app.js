@@ -6,11 +6,35 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var temp=true;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
 });
+
+
+
+function welcome(){
+	//1.page cleaning
+	window.clearInterval(interval);
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.beginPath();
+	
+var x=document.getElementById("game_menu");
+x.style.display="none";
+var y=document.getElementById("welcome_menu");
+y.style.display="block";
+
+//2.display form
+
+}
+
+
+function About(){
+	var x=document.getElementById("game_menu");
+	x.style.display="block";
+}
 
 function Start() {
 	board = new Array();
@@ -163,7 +187,7 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+	if (score == 50 ) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
