@@ -36,7 +36,8 @@ function Register(){
 	x.style.display="none";
 
 	//2.initialize the form's register
-
+	var reg=document.getElementById("container");
+	reg.style.display="block";
 }
 
 
