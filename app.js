@@ -10,31 +10,41 @@ var temp=true;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+	//Start();
+	welcome();
 });
 
 
-
 function welcome(){
-	//1.page cleaning
+//1.page cleaning
 	window.clearInterval(interval);
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.beginPath();
-	
+//2.	
 var x=document.getElementById("game_menu");
 x.style.display="none";
+//
 var y=document.getElementById("welcome_menu");
 y.style.display="block";
 
-//2.display form
+}
+
+
+function Register(){
+	//1. hide the div of menu
+	var x=document.getElementById("welcome_menu");
+	x.style.display="none";
+
+	//2.initialize the form's register
 
 }
 
 
-function About(){
-	var x=document.getElementById("game_menu");
-	x.style.display="block";
+function Login(){
+
 }
+
+
 
 function Start() {
 	board = new Array();
