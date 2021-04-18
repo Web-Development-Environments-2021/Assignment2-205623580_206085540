@@ -4,6 +4,7 @@
 	background-size: 100% 100%;
 	height: 676px;
 	width: 650;
+    max-width: 80em;
     padding: 1em 3em 2em 3em;
     margin: 0em auto;
     border-radius: 4.2px;
@@ -249,8 +250,22 @@ select option {
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
 }
-.container {
-  max-width: 38em;
+#Register {
+    background-size: 100% 100%;
+    background-image:url(pac-man-logo.jpg) ;
+  max-width: 80em;
+  height: 500px;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+#Login{
+    background-size: 100% 100%;
+    background-image:url(pac-man-logo.jpg) ;
+  max-width: 80em;
+  height: 500px;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
   background-color: #fff;

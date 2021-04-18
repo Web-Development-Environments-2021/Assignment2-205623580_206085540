@@ -35,14 +35,20 @@ function Register(){
 	var x=document.getElementById("welcome_menu");
 	x.style.display="none";
 
-	//2.initialize the form's register
-	var reg=document.getElementById("container");
+	//2.display the form's register
+	var reg=document.getElementById("Register");
 	reg.style.display="block";
 }
 
 
 function Login(){
+	//1. hide the div of menu 
+	var x=document.getElementById("welcome_menu");
+	x.style.display="none";
 
+	//2.display the Login form
+	var Login=document.getElementById("Login")
+	Login.style.display="block";
 }
 
 
