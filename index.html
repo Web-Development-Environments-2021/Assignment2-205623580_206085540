@@ -161,8 +161,8 @@
 				</div>
 			  </div>
 			  <a class="back" type="submit" onclick="back()">Back</a>
-			  <button class="back" type="submit" value="submit" data-toggle="modal" data-target="#succsessMessage">Register</button>
-				Launch demo modal
+			  <button class="back" type="submit" value="submit">Register</button>
+
 			  </button>
 			</form>
 		  </div>
@@ -180,23 +180,14 @@
   </div>	
 	</body>
 	<!-- Modal -->
-	<div class="succsessMessage" id="succsessMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
-			</div>
-			<div class="modal-body">
-			  
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		  </div>
+	<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p>The Account was created successfully</p>
+			<a class="accept" align="center" onclick="accept()">accept</a>
 		</div>
+	  
 	  </div>
 </html>

@@ -66,8 +66,22 @@ $(document).ready(function() {
 		}
 
 		if(valid==0){
+
 			dic_users[user_name]=password
-			alert("")
+			var modal = document.getElementById("myModal");
+			modal.style.display="block";
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("accept")[0];
+					
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			  modal.style.display = "none";
+			  accept();
+			}
+			
+	
+			
 		}
 
 		});
@@ -83,6 +97,13 @@ $(document).ready(function() {
 
 
 
+function accept(){
+	var reg=document.getElementById("Register");
+	reg.style.display="none";
+
+	var login=document.getElementById("Login");
+	login.style.display="block"
+}
 
 function welcome(){
 //1.page cleaning
