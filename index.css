@@ -253,7 +253,12 @@ select option {
 #Register {
     background-size: 100% 100%;
     background-image:url(pac-man-logo.jpg) ;
+<<<<<<< HEAD
   height: 100%;
+=======
+  max-width: 80em;
+  height: 520px;
+>>>>>>> 492c18d3287b64b727bd6b35e790bbb1ba4864a6
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
   background-color: #fff;
