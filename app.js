@@ -12,16 +12,17 @@ var dic_users = {'k':'k'}
 
 $(document).ready(function() {
 
-	// //Check the Validiation of Login form
-	// $('#log_form').submit1(function(e){
-	// 	e.preventDefault();
-	// 	var userName= $('#user_name').val()
-	// 	var password=$('#password').val()
-	// 	if((userName in dic_users))
-	// 	{
-	// 		alert("roi")
-	// 	}
-	// });
+	//Check the Validiation of Login form
+	$('#log_form').submit(function(e){
+		e.preventDefault();
+
+		var user_name_login= $('#user_name_login').val();
+		var password_login=$('#password_login').val();
+		$(".error").remove();
+		if(!(user_name_login in dic_users)){
+			$('#user_name_login').after('<span class="error"></br> The User Name doesn\'t exsit</br> </span>')
+		}
+	});
 
 
 	//Check the Validiation of register form
@@ -37,17 +38,17 @@ $(document).ready(function() {
 		if (user_name.length < 1) 
 		{
 			$('#user_name').after('<span class="error">This field is required</span>');
-			valid=1
+			valid=1;
 		}
 		if (Full_Name.length < 1 || Full_Name.search(/[0-9]/) != -1)
 		{
 			$('#Full_Name').after('<span class="error">The Full Name can not contain Number</span>');
-			valid=1
+			valid=1;
 		}
 		if (email.length < 1)
 		{
 			$('#email').after('<span class="error">This field is required</span>');
-			valid=1
+			valid=1;
 		} else
 		 {
 			var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$/;
@@ -55,27 +56,27 @@ $(document).ready(function() {
 			if (!validEmail)
 			{
 			  $('#email').after('<span class="error">Enter a valid email</span>');
-			  valid=1
+			  valid=1;
 			}
 		  }
 			if (password.length < 6)
 			{
 				$('#password').after('<span class="error">Password must be at least 6 characters long</span>');
-				valid=1
+				valid=1;
 			}
 			else if (password.search(/\d/) == -1)
 			{
 			$('#password').after('<span class="error">Password must have at least one Number</span>');
-			valid=1	
+			valid=1;
 			}
 		else if (password.search(/[a-zA-Z]/) == -1)
 		{
 			$('#password').after('<span class="error">Password must have at least one letter</span>');
-			valid=1
+			valid=1;
 		} 
 		else if (password.search(/[^a-zA-Z0-9]/) != -1) {
 			$('#password').after('<span class="error">Invalid char</span>');
-			valid=1
+			valid=1;
 		}
 
 		if(valid==0){
@@ -96,11 +97,6 @@ $(document).ready(function() {
 		}
 
 		});
-
-
-		
-
-
 	context = canvas.getContext("2d");
 	//Start();
 	//welcome();
@@ -112,7 +108,7 @@ function accept(){
 	reg.style.display="none";
 
 	var login=document.getElementById("Login");
-	login.style.display="block"
+	login.style.display="block";
 }
 
 function welcome(){
@@ -131,7 +127,7 @@ y.style.display="block";
 function back(){
 	//1. hide the login screen
 	var login=document.getElementById("Login");
-	login.style.display="none"
+	login.style.display="none";
 
 	//2. hide the register screen
 	var reg=document.getElementById("Register");
@@ -163,16 +159,13 @@ function Register(){
 }
 
 
-
-
-
 function Login(){
 	//1. hide the div of menu 
-	var x=document.getElementById("welcome_menu")
-	x.style.display="none"
+	var x=document.getElementById("welcome_menu");
+	x.style.display="none";
 
 	//2.display the Login form
-	var Login=document.getElementById("Login")
+	var Login=document.getElementById("Login");
 	Login.style.display="block";
 }
 

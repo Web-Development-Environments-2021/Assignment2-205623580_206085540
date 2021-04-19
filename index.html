@@ -18,7 +18,7 @@
 
 	<body>
 
-	<div id="welcome_menu" style="display: blick;">
+	<div id="welcome_menu" style="display: block;">
 		<center>
 		<span class='start-btn1' onclick="Login()">Login</span>
 		<span class='start-btn2' onclick="Register()">Register</span>
@@ -171,10 +171,10 @@
 <div id="Login" style="display: none;">
 	<center>
 		<p class="sign" align="center">Sign in</p>
-		<form class="log_form">
-		  <input id="user_name" class="un " type="text" align="center" placeholder="Username"></br>
-		  <input id="password" class="pass" type="password" align="center" placeholder="Password"></br>
-		  <button class="submit"  align="center" >START</button>
+		<form id="log_form">
+		  <input id="user_name_login" class="un " type="text" align="center" placeholder="Username"></br>
+		  <input id="password_login" class="pass" type="password" align="center" placeholder="Password"></br>
+		  <button class="submit" type="submit" align="center" >START</button>
 			<a class="back" type="submit" onclick="back()">Back</a>
 			</form>
 		  </center>
