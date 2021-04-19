@@ -253,8 +253,7 @@ select option {
 #Register {
     background-size: 100% 100%;
     background-image:url(pac-man-logo.jpg) ;
-  max-width: 80em;
-  height: 500px;
+  height: 100%;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
   background-color: #fff;
@@ -311,8 +310,6 @@ select option {
 
 
 
-
-
 HTML CSSResult Skip Results Iframe
 EDIT ON
         body {
@@ -339,6 +336,7 @@ EDIT ON
     
     .un {
     width: 76%;
+    max-width: 20em;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -353,7 +351,7 @@ EDIT ON
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
-    max-width: 20em;
+    
 
     }
     
@@ -362,7 +360,8 @@ EDIT ON
     }
     
     .pass {
-     width: 76%;
+    width: 76%;
+    max-width: 20em;
     color: rgb(13, 16, 17);
     font-weight: 700;
     font-size: 14px;
@@ -386,7 +385,14 @@ EDIT ON
         border: 2px solid rgba(0, 0, 0, 0.18) !important;
         
     }
-    
+
+    .error {
+        color:white;
+        margin-left: 5px;
+        text-shadow: 2px 2px red;
+      }
+
+
     .submit {
       cursor: pointer;
         border-radius: 5em;
@@ -398,8 +404,23 @@ EDIT ON
         padding-bottom: 10px;
         padding-top: 10px;
         font-family: 'Ubuntu', sans-serif;
-        margin-left: 20%;
-        font-size: 13px;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+        max-width: 40em;
+    }
+
+    .back{
+        cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #9C27B0, #E040FB);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 18px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
         max-width: 30em;
     }
@@ -422,3 +443,4 @@ EDIT ON
         }
         
 
+    }

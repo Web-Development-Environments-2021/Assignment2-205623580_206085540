@@ -7,12 +7,81 @@ var start_time;
 var time_elapsed;
 var interval;
 var temp=true;
+var dic_users = {'k':'k'}
+
 
 $(document).ready(function() {
+
+	//Check the Validiation of register form
+	$('#first_form').submit(function(e) {
+		e.preventDefault();
+		var valid=0;
+		var user_name = $('#user_name').val();
+		var Full_Name = $('#Full_Name').val();
+		var email = $('#email').val();
+		var password = $('#password').val();
+		$(".error").remove();
+
+		if (user_name.length < 1) 
+		{
+			$('#user_name').after('<span class="error">This field is required</span>');
+			valid=1
+		}
+		if (Full_Name.length < 1 || Full_Name.search(/[0-9]/) != -1)
+		{
+			$('#Full_Name').after('<span class="error">The Full Name can not contain Number</span>');
+			valid=1
+		}
+		if (email.length < 1)
+		{
+			$('#email').after('<span class="error">This field is required</span>');
+			valid=1
+		} else
+		 {
+			var regEx = /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@(?:[A-Za-z0-9-]{1,63}\.){1,125}[A-Za-z]{2,63}$/;
+			var validEmail = regEx.test(email);
+			if (!validEmail)
+			{
+			  $('#email').after('<span class="error">Enter a valid email</span>');
+			  valid=1
+			}
+		  }
+			if (password.length < 6)
+			{
+				$('#password').after('<span class="error">Password must be at least 6 characters long</span>');
+				valid=1
+			}
+			else if (password.search(/\d/) == -1)
+			{
+			$('#password').after('<span class="error">Password must have at least one Number</span>');
+			valid=1	
+			}
+		else if (password.search(/[a-zA-Z]/) == -1)
+		{
+			$('#password').after('<span class="error">Password must have at least one letter</span>');
+		} 
+		else if (password.search(/[^a-zA-Z0-9]/) != -1) {
+			$('#password').after('<span class="error">Invalid char</span>');
+			valid=1
+		}
+
+		if(valid==0){
+			dic_users[user_name]=password
+			alert("")
+		}
+
+		});
+
+
+		
+
+
 	context = canvas.getContext("2d");
 	//Start();
-	welcome();
+	//welcome();
 });
+
+
 
 
 function welcome(){
@@ -26,9 +95,31 @@ x.style.display="none";
 //
 var y=document.getElementById("welcome_menu");
 y.style.display="block";
-
 }
 
+function back(){
+	//1. hide the login screen
+	var login=document.getElementById("Login");
+	login.style.display="none"
+
+	//2. hide the register screen
+	var reg=document.getElementById("Register");
+	reg.style.display="none";
+
+	//3.display the welcom screen
+	var y=document.getElementById("welcome_menu");
+	y.style.display="block";	
+}
+
+
+function StartNewGame(){
+	var Login=document.getElementById("Login")
+	Login.style.display="none";
+	
+	var x=document.getElementById("game_menu");
+	x.style.display="block";
+	Start();
+}
 
 function Register(){
 	//1. hide the div of menu
@@ -41,10 +132,13 @@ function Register(){
 }
 
 
+
+
+
 function Login(){
 	//1. hide the div of menu 
-	var x=document.getElementById("welcome_menu");
-	x.style.display="none";
+	var x=document.getElementById("welcome_menu")
+	x.style.display="none"
 
 	//2.display the Login form
 	var Login=document.getElementById("Login")
