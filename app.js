@@ -12,6 +12,18 @@ var dic_users = {'k':'k'}
 
 $(document).ready(function() {
 
+	// //Check the Validiation of Login form
+	// $('#log_form').submit1(function(e){
+	// 	e.preventDefault();
+	// 	var userName= $('#user_name').val()
+	// 	var password=$('#password').val()
+	// 	if((userName in dic_users))
+	// 	{
+	// 		alert("roi")
+	// 	}
+	// });
+
+
 	//Check the Validiation of register form
 	$('#first_form').submit(function(e) {
 		e.preventDefault();
@@ -59,6 +71,7 @@ $(document).ready(function() {
 		else if (password.search(/[a-zA-Z]/) == -1)
 		{
 			$('#password').after('<span class="error">Password must have at least one letter</span>');
+			valid=1
 		} 
 		else if (password.search(/[^a-zA-Z0-9]/) != -1) {
 			$('#password').after('<span class="error">Invalid char</span>');
@@ -80,8 +93,6 @@ $(document).ready(function() {
 			  accept();
 			}
 			
-	
-			
 		}
 
 		});
@@ -94,7 +105,6 @@ $(document).ready(function() {
 	//Start();
 	//welcome();
 });
-
 
 
 function accept(){

@@ -4,6 +4,7 @@
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -170,13 +171,14 @@
 <div id="Login" style="display: none;">
 	<center>
 		<p class="sign" align="center">Sign in</p>
-		<form class="form1">
-		  <input class="un " type="text" align="center" placeholder="Username"></br>
-		  <input class="pass" type="password" align="center" placeholder="Password"></br>
-		  <a class="submit" align="center" onclick="StartNewGame()">START</a>
-		  <p class="forgot" align="center"><a href="#">Forgot Password?</p>
+		<form class="log_form">
+		  <input id="user_name" class="un " type="text" align="center" placeholder="Username"></br>
+		  <input id="password" class="pass" type="password" align="center" placeholder="Password"></br>
+		  <button class="submit"  align="center" >START</button>
 			<a class="back" type="submit" onclick="back()">Back</a>
-			<center>
+			</form>
+		  </center>
+		
   </div>	
 	</body>
 	<!-- Modal -->
