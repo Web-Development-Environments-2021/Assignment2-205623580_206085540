@@ -3,6 +3,7 @@ var shape = new Object();
 var board;
 var score;
 var pac_color;
+var pac_pos=2;
 var start_time;
 var time_elapsed;
 var interval;
@@ -15,12 +16,20 @@ $(document).ready(function() {
 	//Check the Validiation of Login form
 	$('#log_form').submit(function(e){
 		e.preventDefault();
-
+		var valid=0;
 		var user_name_login= $('#user_name_login').val();
 		var password_login=$('#password_login').val();
 		$(".error").remove();
 		if(!(user_name_login in dic_users)){
 			$('#user_name_login').after('<span class="error"></br> The User Name doesn\'t exsit</br> </span>')
+			valid=1
+		}
+		else if (dic_users[user_name_login]!=password_login){
+			$('#password_login').after('<span class="error"></br> Your password is invalid. Please try again.</br> </span>')
+			valid=1
+		}
+		if (valid==0){
+			StartNewGame()
 		}
 	});
 
@@ -265,7 +274,7 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			if (board[i][j] == 2) {
+			if (board[i][j] == 2) {//right
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
@@ -274,8 +283,41 @@ function Draw() {
 				context.beginPath();
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
+				context.fill();}
+			else if (board[i][j] == 2.1) {//left
+				context.beginPath();
+				context.arc(center.x, center.y, 30,  1.15 * Math.PI,0.85* Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
 				context.fill();
-			} else if (board[i][j] == 1) {
+				context.beginPath();
+				context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 2.2) {//down
+				context.beginPath();
+				context.arc(center.x, center.y, 30,  0.65 * Math.PI,2.35* Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x - 15, center.y + 5, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 2.3) {//up
+				context.beginPath();
+				context.arc(center.x, center.y, 30,   1.65 * Math.PI,1.35* Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x - 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			 else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
@@ -296,27 +338,31 @@ function UpdatePosition() {
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
+			pac_pos = 2.3;
 		}
 	}
 	if (x == 2) {
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
+			pac_pos = 2.2;
 		}
 	}
 	if (x == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
+			pac_pos = 2.1;
 		}
 	}
 	if (x == 4) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
+			pac_pos= 2;
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
 		score++;
 	}
-	board[shape.i][shape.j] = 2;
+	board[shape.i][shape.j]=pac_pos
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (score >= 20 && time_elapsed <= 10) {
