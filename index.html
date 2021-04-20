@@ -33,8 +33,10 @@
 			<input id="lblScore" type="text" />
 		</div>
 		<div id="time" style="position:absolute; top: 100px; left: 250px; z-index:2">
-			<label for="lblTime" >TIME:</label>
+			<label for="lblTime" >TIME:</label><br>
 			<input id="lblTime" type="text" />
+			<label for="lblScore">player:</label>
+
 		</div>
 		<div id="game" style="position:absolute; top: 200px; left: 250px; z-index:2">
 			<canvas id="canvas" height="600" width="600"></canvas>
@@ -167,6 +169,7 @@
 			  </button>
 			</form>
 		  </div>
+
 <!--div of Login-->
 <div id="Login" style="display: none;">
 	<center>
@@ -176,10 +179,26 @@
 		  <input id="password_login" class="pass" type="password" align="center" placeholder="Password"></br>
 		  <button class="submit" type="submit" align="center" >START</button>
 			<a class="back" type="submit" onclick="back()">Back</a>
+			<audio id="mySong">
+				<source src="sounds/start-music.mp3" type="audio/mp3">
+				</audio>
 			</form>
 		  </center>
-		
   </div>	
+
+  <!--The Settings Modify Screen that will display agter the login-->
+<div id="setting_Screen" class="setting_Screen" style="display: none;">
+	<center>
+	<form id="setting_form">
+		<input class="NOE" type="text" align="center" placeholder="Num Of Enemy"></br>
+		<input class="CKd" type="text" align="center" placeholder="Number Of Ball (Min:50 Max:90)"></br>
+		<input class="DOTG" type="text" align="center" placeholder="Duration Of The Game (Min:60sec )"></br>
+	</center>
+	</form>
+</div>
+
+
+
 	</body>
 	<!-- Modal -->
 	<div id="myModal" class="modal">

@@ -22,8 +22,6 @@ var enemy=new Image();
 enemy.src="enemy.png";
 
 $(document).ready(function() {
-	
-
 
 	//Check the Validiation of Login form
 	$('#log_form').submit(function(e){
@@ -41,7 +39,7 @@ $(document).ready(function() {
 			valid=1
 		}
 		if (valid==0){
-			StartNewGame()
+			Start_after_sign()
 		}
 	});
 
@@ -163,13 +161,21 @@ function back(){
 }
 
 
-function StartNewGame(){
+function Start_after_sign(){
 	var Login=document.getElementById("Login")
 	Login.style.display="none";
 	
-	var x=document.getElementById("game_menu");
-	x.style.display="block";
-	Start();
+	// var x=document.getElementById("game_menu");
+	// x.style.display="block";
+
+	var setting=document.getElementById("setting_Screen");
+	setting.style.display="block";
+
+
+	var song=document.getElementById("mySong");
+	song.play();
+
+	//Start();
 }
 
 function Register(){
@@ -192,6 +198,10 @@ function Login(){
 	var Login=document.getElementById("Login");
 	Login.style.display="block";
 }
+
+
+
+
 
 
 
@@ -331,6 +341,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 2.1) 
 			{//left
+				alert(board)
 				context.beginPath();
 				context.arc(center.x, center.y, 30,  1.15 * Math.PI,0.85* Math.PI); // half circle
 				context.lineTo(center.x, center.y);

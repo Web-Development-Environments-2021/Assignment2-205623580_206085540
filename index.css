@@ -73,6 +73,74 @@
     cursor: pointer;
     width: 200px;
 }
+
+.NOE{
+	margin-top: 15%;
+  width: 76%;
+  max-width: 20em;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background:white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  text-align: center;
+  margin-bottom: 2%;
+  font-family: 'Ubuntu', sans-serif;
+   
+}
+.CKd{
+  width: 76%;
+    max-width: 20em;
+    color: rgb(13, 16, 17);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background:white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+.DOTG{
+  width: 76%;
+  max-width: 20em;
+  color: rgb(13, 16, 17);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background:white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 2%;
+  text-align: center;
+}
+
+#setting_Screen{
+  background-size: 100% 100%;
+  background-image:url(pac-man-logo.jpg) ;
+  max-width: 80em;
+  height: 500px;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+
+  }
+
+
 .video-game-button:active, .start-btn1:active,.start-btn2:active {
 	box-shadow: none;
 	position: relative;
@@ -271,6 +339,10 @@ select option {
   border-radius: 4.2px;
   box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
 }
+
+
+
+
 .row {
   zoom: 1;
 }
