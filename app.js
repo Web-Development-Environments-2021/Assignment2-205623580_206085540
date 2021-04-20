@@ -234,7 +234,9 @@ function Start() {
 					board2[i][j] = 2;
 				}else if (randomNum < (1.0 * ( enemy_remain + food_remain)) / cnt) {
 					enemypos.i=i;
+					enemypos.ib=i;
 					enemypos.j=j;
+					enemypos.jb=j
 					enemy_remain--;
 					board[i][j] = 0;
 					board2[i][j] = 5;
@@ -462,6 +464,8 @@ function UpdatePosition() {
 function UpdateEnemyPosition(){
 	board2[enemypos.i][enemypos.j] = 0;
 	var x=getBestMove();
+	enemypos.ib=enemypos.i;
+	enemypos.jb=enemypos.j;
 	if (x == 1) {
 		if (shape.i == enemypos.i && shape.j == enemypos.j){
 			lifepool--;
@@ -530,19 +534,19 @@ function getBestMove(){
 	var a=[100,100,100,100];
 	var b=0;
 	var c=100;
-	if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4){
+	if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4 && enemypos.j-1 !=enemypos.jb){
 		a[0]=Math.abs(enemypos.i-shape.i) + Math.abs((enemypos.j-1)-shape.j);
 		if(a[0]<c) {b=1;c=a[0]}
 	}
-	if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4) {
+	if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4 && enemypos.j+1 !=enemypos.jb) {
 		a[1]=Math.abs(enemypos.i-shape.i) + Math.abs((enemypos.j+1)-shape.j);
 		if(a[1]<c) {b=2;c=a[1]}
 	}
-	if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4) {
+	if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4 && enemypos.i-1 !=enemypos.ib) {
 		a[2]=Math.abs((enemypos.i-1)-shape.i) + Math.abs(enemypos.j-shape.j);
 		if(a[2]<c) {b=3;c=a[2]}
 	}
-	if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4) {
+	if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4 && enemypos.i+1 !=enemypos.ib) {
 		a[3]=Math.abs((enemypos.i+1)-shape.i) + Math.abs(enemypos.j-shape.j);
 		if(a[3]<c) {b=4;c=a[3]};
 	}
