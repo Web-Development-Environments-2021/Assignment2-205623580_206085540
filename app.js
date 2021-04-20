@@ -388,44 +388,30 @@ function UpdatePosition() {
 	var x = GetKeyPressed();
 	if (x == 1) {
 		pac_pos = 2.3;
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 			
 		}
 	}
 	if (x == 2) {
 		pac_pos = 2.2;
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		 if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 			
 		}
 	}
 	if (x == 3) {
 		pac_pos = 2.1;
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+		
+		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 			
 		}
 	}
 	if (x == 4) {
 		pac_pos= 2;
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+
+		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 			
 		}
@@ -444,7 +430,7 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if(lifepool==0){
+	if(lifepool<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("game over");
@@ -467,55 +453,38 @@ function UpdateEnemyPosition(){
 	enemypos.ib=enemypos.i;
 	enemypos.jb=enemypos.j;
 	if (x == 1) {
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4) {
+		if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4) {
 			enemypos.j--;
 			
 		}
 	}
 	if (x == 2) {
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4) {
+		if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4) {
 			enemypos.j++;
 			
 		}
 	}
 	if (x == 3) {
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4) {
+
+		if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4) {
 			enemypos.i--;
 			
 		}
 	}
 	if (x == 4) {
-		if (shape.i == enemypos.i && shape.j == enemypos.j){
-			lifepool--;
-			score-=10
-		}
-		else if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4) {
+
+		if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4) {
 			enemypos.i++;
 			
 		}
 	}
-	if(board[enemypos.i][enemypos.j] == 2){
-		lifepool--;
-		score-=10
-	}
+
 
 
 	board2[enemypos.i][enemypos.j]=5
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if(lifepool==0){
+	if(lifepool<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("game over");
