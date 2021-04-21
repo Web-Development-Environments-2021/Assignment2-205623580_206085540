@@ -41,6 +41,9 @@ $(document).ready(function() {
 		enemy_remain=$('#nof').val();
 		food_remain =$('#ckd').val();
 		lifepool=$('#life').val();
+		normal_color=$('#favcolor1').val();
+		magick_color=$('#favcolor2').val();
+		epic_color=$('#favcolor3').val();
 		startgame();
 
 	});
@@ -242,9 +245,6 @@ function Start() {
 	lblpname.value=player_name;
 	score = 0;
 	pac_color = "yellow";
-	normal_color="black";
-	magick_color="green";
-	epic_color="purple";
 	//lifepool=1
 	var cnt = 100;
 	food_remain = 50;
