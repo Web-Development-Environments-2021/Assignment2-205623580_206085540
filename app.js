@@ -41,7 +41,7 @@ $(document).ready(function() {
 		if(game_time=="unlimit") game_time=9999;
 		game_time=parseFloat(game_time);
 		enemy_remain=$('#nof').val();
-		food_remain =$('#ckd').val();
+		food_remain =$('#cdk').val();
 		lifepool=$('#life').val();
 		normal_color=$('#favcolor1').val();
 		magick_color=$('#favcolor2').val();
