@@ -544,7 +544,7 @@ function UpdatePosition() {
 		window.alert("game over");
 		welcome();
 	}
-	if (score == 300 ) {
+	if (score >= 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("Game completed");
@@ -600,7 +600,7 @@ function UpdateEnemyPosition(){
 		window.alert("game over");
 		welcome();
 	}
-	if (score == 300 ) {
+	if (score >= 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("Game completed");
