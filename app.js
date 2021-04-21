@@ -2,6 +2,7 @@ var context;
 var shape = new Object();
 var enemypos =new Object();
 var board;
+var board2;
 var lifepool;
 var score;
 var pac_color;
@@ -361,7 +362,7 @@ function Start() {
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
-	while (board[i][j] != 0) {
+	while (board[i][j] != 0 || board2[i][j]==5) {
 		i = Math.floor(Math.random() * 9 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
@@ -520,6 +521,9 @@ function UpdatePosition() {
 	if(board2[shape.i][shape.j] == 5){
 		lifepool--;
 		score-=10
+		var temp=findRandomEmptyCell(board);
+		shape.i=temp[0];
+		shape.j=temp[1];
 	}
 	else if (board[shape.i][shape.j] == 1) {
 		score+=5;
