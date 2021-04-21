@@ -306,7 +306,6 @@ function Start() {
 	pac_color = "yellow";
 	//lifepool=1
 	var cnt = 100;
-	food_remain = 50;
 	var normal = Math.round(food_remain*0.6);
 	var magick = Math.round(food_remain*0.3);
 	var epic = Math.round(food_remain*0.1);
