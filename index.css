@@ -74,6 +74,42 @@
     width: 200px;
 }
 
+#score{
+  width: 100px;
+  left: 10%;
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+  color: blueviolet;
+  z-index:2
+}
+#time{
+  top: 0px;
+  width: 100px;
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+  color: blueviolet;
+  z-index:2
+}
+#lifepool{
+  top: 0px;
+  width: 100px;
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+  color: blueviolet;
+  z-index:2
+}
+#pname{
+  top: 0px;
+  width: 100px;
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+  color: blueviolet;
+  z-index:2
+}
+#game{
+  position:absolute; 
+  top: 200px; 
+  left: 250px;
+  text-shadow: 1px 1px pink, -1px -1px maroon;
+  color: blueviolet; 
+  z-index:2
+}
 .NOE{
 	
   width: 76%;

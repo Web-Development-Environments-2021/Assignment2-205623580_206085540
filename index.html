@@ -27,18 +27,24 @@
 
 
 
-	<div id="game_menu" style="display: none;">
-		<div id="score" style="position:absolute;left: 250px; z-index:2">
+	<div id="game_menu"  style="display: none;">
+		<div id="score" style="display:inline-block;" >
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
 		</div>
-		<div id="time" style="position:absolute; top: 100px; left: 250px; z-index:2">
+		<div id="time"  style="display:inline-block;">
 			<label for="lblTime" >TIME:</label><br>
 			<input id="lblTime" type="text" />
-			<label for="lblScore">player:</label>
-
 		</div>
-		<div id="game" style="position:absolute; top: 200px; left: 250px; z-index:2">
+		<div id="lifepool"  style="display:inline-block;" >
+			<label for="lblLife">LIFEPOOL:</label>
+			<input id="lblLife" type="text" />
+		</div>
+		<div id="pname"  style="display:inline-block;" >
+			<label for="lblpname">PLAYRENAME:</label>
+			<input id="lblpname" type="text" />
+		</div>
+		<div id="game" >
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
 		</div>

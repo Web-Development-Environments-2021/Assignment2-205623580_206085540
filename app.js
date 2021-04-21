@@ -10,6 +10,7 @@ var start_time;
 var time_elapsed;
 var game_time
 var enemy_remain
+var player_name;
 var food_remain
 var interval;
 var interval2;
@@ -54,6 +55,7 @@ $(document).ready(function() {
 			valid=1
 		}
 		if (valid==0){
+			player_name=user_name_login;
 			Start_after_sign()
 		}
 	});
@@ -231,6 +233,7 @@ function Login(){
 function Start() {
 	board = new Array();
 	board2 =new Array();
+	lblpname.value=player_name;
 	score = 0;
 	pac_color = "yellow";
 	//lifepool=1
@@ -334,6 +337,8 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
+	lblLife.value=lifepool;
+	
 	for (var i = 0; i < 10; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
