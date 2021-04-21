@@ -457,19 +457,19 @@ function Draw() {
 			 else if (board[i][j] == 1) 
 			 {//food normal
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 				context.fillStyle = normal_color; //color
 				context.fill();
 			}else if (board[i][j] == 1.1) 
 			{//food magick
 			   context.beginPath();
-			   context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			   context.arc(center.x, center.y, 13, 0, 2 * Math.PI); // circle
 			   context.fillStyle = magick_color; //color
 			   context.fill();
 		   }else if (board[i][j] == 1.2) 
 		   {//food epic
 			  context.beginPath();
-			  context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			  context.arc(center.x, center.y, 17, 0, 2 * Math.PI); // circle
 			  context.fillStyle = epic_color; //color
 			  context.fill();
 		  } else if (board[i][j] == 4) 
