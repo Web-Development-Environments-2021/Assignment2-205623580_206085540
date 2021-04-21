@@ -8,6 +8,9 @@ var pac_color;
 var pac_pos=2;
 var start_time;
 var time_elapsed;
+var game_time
+var enemy_remain
+var food_remain
 var interval;
 var interval2;
 var temp=true;
@@ -24,6 +27,17 @@ enemy.src="enemy.png";
 $(document).ready(function() {
 
 	//Check the Validiation of Login form
+	$('#setting_form').submit(function(e){
+		e.preventDefault();
+		var valid=0;
+		game_time= $('#dotg').val();
+		enemy_remain=$('#nof').val();
+		food_remain =$('#ckd').val();
+		startgame();
+
+	});
+
+
 	$('#log_form').submit(function(e){
 		e.preventDefault();
 		var valid=0;
@@ -220,9 +234,9 @@ function Start() {
 	pac_color = "yellow";
 	lifepool=1
 	var cnt = 100;
-	var food_remain = 50;
+	food_remain = 50;
 	var pacman_remain = 1;
-	var enemy_remain = 1;
+	enemy_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
