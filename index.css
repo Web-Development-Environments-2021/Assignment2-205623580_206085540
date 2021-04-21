@@ -75,30 +75,11 @@
 }
 
 .NOE{
-	margin-top: 15%;
-  width: 76%;
-  max-width: 20em;
-  color: rgb(38, 50, 56);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  background:white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-  box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.02);
-  text-align: center;
-  margin-bottom: 2%;
-  font-family: 'Ubuntu', sans-serif;
-   
-}
-.CKd{
+	
   width: 76%;
     max-width: 20em;
     color: rgb(13, 16, 17);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 14px;
     letter-spacing: 1px;
     background:white;
@@ -107,31 +88,59 @@
     outline: none;
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
-    margin-bottom: 2%;
+    text-align: center;
+   
+}
+#nof{
+  margin-top: 12%;
+  text-shadow: 0 0 5px #e71506, 0 0 20px #15d3d3;
+  color: #ffffff;
+	text-align: center;
+  font-size: 14px;
+}
+.nof{
+  text-shadow: 0 0 5px #e71506, 0 0 20px #15d3d3;
+  color: #ffffff;
+	text-align: center;
+  font-size: 14px;
+}
+.CKd{
+  width: 76%;
+    max-width: 20em;
+    color: rgb(13, 16, 17);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background:white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
     text-align: center;
 }
 
 .DOTG{
   width: 76%;
-  max-width: 20em;
-  color: rgb(13, 16, 17);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-  background:white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  box-sizing: border-box;
-  border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 2%;
-  text-align: center;
+    max-width: 20em;
+    color: rgb(13, 16, 17);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background:white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    text-align: center;
 }
 
 #setting_Screen{
   background-size: 100% 100%;
   background-image:url(pac-man-logo.jpg) ;
   max-width: 80em;
-  height: 500px;
+  height: 100% 100%;
   padding: 1em 3em 2em 3em;
   margin: 0em auto;
   background-color: #fff;

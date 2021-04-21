@@ -177,7 +177,15 @@ function Start_after_sign(){
 
 	//Start();
 }
+function startgame(){
+	var setting=document.getElementById("setting_Screen");
+	setting.style.display="none";
 
+	var x=document.getElementById("game_menu");
+	x.style.display="block";
+
+	Start();
+}
 function Register(){
 	//1. hide the div of menu
 	var x=document.getElementById("welcome_menu");
@@ -278,8 +286,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 100);
-	interval2 = setInterval(UpdateEnemyPosition, 450);
+	interval = setInterval(UpdatePosition, 150);
+	interval2 = setInterval(UpdateEnemyPosition, 300);
 }
 
 function findRandomEmptyCell(board) {
@@ -341,7 +349,6 @@ function Draw() {
 			}
 			else if (board[i][j] == 2.1) 
 			{//left
-				alert(board)
 				context.beginPath();
 				context.arc(center.x, center.y, 30,  1.15 * Math.PI,0.85* Math.PI); // half circle
 				context.lineTo(center.x, center.y);
