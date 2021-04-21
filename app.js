@@ -8,6 +8,7 @@ var pac_color;
 var pac_pos=2;
 var start_time;
 var time_elapsed;
+var steptime
 var game_time
 var enemy_remain
 var player_name;
@@ -17,7 +18,9 @@ var interval2;
 var temp=true;
 var dic_users = {'k':'k'}
 var enemy=new Image();
-
+var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt) ball_color[0]-epic ball(25pt)
+var magick_color;
+var epic_color;
 
 
 
@@ -32,6 +35,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		var valid=0;
 		game_time= $('#dotg').val();
+		if(game_time=="unlimit") game_time=9999;
+		game_time=parseFloat(game_time);
 		enemy_remain=$('#nof').val();
 		food_remain =$('#ckd').val();
 		lifepool=$('#life').val();
@@ -236,12 +241,19 @@ function Start() {
 	lblpname.value=player_name;
 	score = 0;
 	pac_color = "yellow";
+	normal_color="black";
+	magick_color="green";
+	epic_color="purple";
 	//lifepool=1
 	var cnt = 100;
 	food_remain = 50;
+	var normal = Math.round(food_remain*0.6);
+	var magick = Math.round(food_remain*0.3);
+	var epic = Math.round(food_remain*0.1);
 	var pacman_remain = 1;
 	enemy_remain = 1;
 	start_time = new Date();
+	steptime=start_time;
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		board2[i] = new Array();
@@ -256,26 +268,54 @@ function Start() {
 			) {
 				board[i][j] = 4;
 				board2[i][j] = 4;
+			}
+			else if(
+				(i == 0 && j == 0) ||
+				(i == 0 && j == 9) ||
+				(i == 9 && j == 0) ||
+				(i == 9 && j == 9) 
+			){
+				if(i == 0 && j == 0){
+				enemypos.i=i;
+				enemypos.ib=i;
+				enemypos.j=j;
+				enemypos.jb=j
+				board[i][j] = 5;
+				board2[i][j] = 5;
+				}
+				else if(i == 0 && j == 9){
+					board[i][j] = 5;
+					board2[i][j] = 0;
+				}
+				else if(i == 9 && j == 0){
+					board[i][j] = 5;
+					board2[i][j] = 0;
+				}
+				else if(i == 9 && j == 9){
+					board[i][j] = 5;
+					board2[i][j] = 0;
+				}
 			} else {
 				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
+				if (randomNum <= (1.0 * normal) / cnt) {
+					normal--;
 					board[i][j] = 1;
 					board2[i][j] = 0;
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+				}
+				else if (randomNum < (1.0 * (normal + magick)) / cnt) {
+					magick--;
+					board[i][j] = 1.1;
+					board2[i][j] = 0;
+				}else if (randomNum < (1.0 * (normal + magick + epic)) / cnt) {
+					epic--
+					board[i][j] = 1.2;
+					board2[i][j] = 0;
+				} else if (randomNum < (1.0 * (pacman_remain + normal + magick + epic)) / cnt) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2;
 					board2[i][j] = 2;
-				}else if (randomNum < (1.0 * ( enemy_remain + food_remain)) / cnt) {
-					enemypos.i=i;
-					enemypos.ib=i;
-					enemypos.j=j;
-					enemypos.jb=j
-					enemy_remain--;
-					board[i][j] = 0;
-					board2[i][j] = 5;
 				} else {
 					board[i][j] = 0;
 					board2[i][j] = 0;
@@ -284,10 +324,20 @@ function Start() {
 			}
 		}
 	}
-	while (food_remain > 0) {
+	while (normal > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
-		food_remain--;
+		normal--;
+	}
+	while (magick > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 1.1;
+		magick--;
+	}
+	while (epic > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 1.2;
+		epic--;
 	}
 	keysDown = {};
 	addEventListener(
@@ -336,7 +386,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = time_elapsed;
+	lblTime.value = game_time.toFixed(2);
 	lblLife.value=lifepool;
 	
 	for (var i = 0; i < 10; i++) {
@@ -404,18 +454,31 @@ function Draw() {
 				context.fill();
 			}
 			 else if (board[i][j] == 1) 
-			 {//food
+			 {//food normal
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = normal_color; //color
 				context.fill();
-			} else if (board[i][j] == 4) 
+			}else if (board[i][j] == 1.1) 
+			{//food magick
+			   context.beginPath();
+			   context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			   context.fillStyle = magick_color; //color
+			   context.fill();
+		   }else if (board[i][j] == 1.2) 
+		   {//food epic
+			  context.beginPath();
+			  context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			  context.fillStyle = epic_color; //color
+			  context.fill();
+		  } else if (board[i][j] == 4) 
 			{//wall
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
+			
 			
 		}
 	}
@@ -459,22 +522,29 @@ function UpdatePosition() {
 		score-=10
 	}
 	else if (board[shape.i][shape.j] == 1) {
-		score++;
+		score+=5;
 	}
-
+	else if (board[shape.i][shape.j] == 1.1) {
+		score+=15;
+	}
+	else if (board[shape.i][shape.j] == 1.2) {
+		score+=25;
+	}
 	board[shape.i][shape.j]=pac_pos
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	game_time=game_time-(currentTime-steptime)/1000;
+	steptime=currentTime;
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if(lifepool<=0){
+	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("game over");
 		welcome();
 	}
-	if (score == 50 ) {
+	if (score == 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("Game completed");
@@ -522,13 +592,15 @@ function UpdateEnemyPosition(){
 	board2[enemypos.i][enemypos.j]=5
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if(lifepool<=0){
+	game_time=game_time-(currentTime-steptime)/1000;
+	steptime=currentTime;
+	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("game over");
 		welcome();
 	}
-	if (score == 50 ) {
+	if (score == 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
 		window.alert("Game completed");
