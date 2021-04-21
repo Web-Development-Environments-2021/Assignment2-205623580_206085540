@@ -33,6 +33,7 @@ $(document).ready(function() {
 		game_time= $('#dotg').val();
 		enemy_remain=$('#nof').val();
 		food_remain =$('#ckd').val();
+		lifepool=$('#life').val();
 		startgame();
 
 	});
@@ -232,7 +233,7 @@ function Start() {
 	board2 =new Array();
 	score = 0;
 	pac_color = "yellow";
-	lifepool=1
+	//lifepool=1
 	var cnt = 100;
 	food_remain = 50;
 	var pacman_remain = 1;
