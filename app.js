@@ -22,8 +22,10 @@ var enemy=new Image();
 var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt) ball_color[0]-epic ball(25pt)
 var magick_color;
 var epic_color;
-
-
+var up_key=38;
+var down_key=40;
+var left_key=37;
+var right_key=39;
 
 
 
@@ -148,7 +150,64 @@ $(document).ready(function() {
 });
 
 
+function keypressdown(e) {
+	keysDown[e.keyCode] = true;
+}
+function keypressup(e) {
+	keysDown[e.keyCode] = false;
+}
+function keypressdownup(e) {
+	document.getElementById("keyup").innerHTML = e.key;
+	up_key=e.keyCode;
+	removeEventListener("keydown",keypressdownup,false);
+}
+function keypressdownleft(e) {
+	document.getElementById("keyleft").innerHTML = e.key;
+	left_key=e.keyCode;
+	removeEventListener("keydown",keypressdownleft,false);
+}
+function keypressdowndown(e) {
+	document.getElementById("keydown").innerHTML = e.key;
+	down_key=e.keyCode;
+	removeEventListener("keydown",keypressdowndown,false);
+}
+function keypressdownright(e) {
+	document.getElementById("keyright").innerHTML = e.key;
+	right_key=e.keyCode;
+	removeEventListener("keydown",keypressdownright,false);
+}
 
+function upKeyBind(){
+	
+	addEventListener("keydown",keypressdownup,false);
+	//wait(3000);
+	//removeEventListener("keyd2",keypressdown2,false);
+}
+function leftKeyBind(){
+	
+	addEventListener("keydown",keypressdownleft,false);
+	//wait(3000);
+	//removeEventListener("keyd2",keypressdown2,false);
+}
+function downKeyBind(){
+	
+	addEventListener("keydown",keypressdowndown,false);
+	//wait(3000);
+	//removeEventListener("keyd2",keypressdown2,false);
+}
+function rightKeyBind(){
+	
+	addEventListener("keydown",keypressdownright,false);
+	//wait(3000);
+	//removeEventListener("keyd2",keypressdown2,false);
+}
+function wait(ms){
+	var start = new Date().getTime();
+	var end = start;
+	while(end < start + ms) {
+	  end = new Date().getTime();
+   }
+ }
 
 function accept(){
 	var reg=document.getElementById("Register");
@@ -341,20 +400,10 @@ function Start() {
 		epic--;
 	}
 	keysDown = {};
-	addEventListener(
-		"keydown",
-		function(e) {
-			keysDown[e.keyCode] = true;
-		},
-		false
-	);
-	addEventListener(
-		"keyup",
-		function(e) {
-			keysDown[e.keyCode] = false;
-		},
-		false
-	);
+	addEventListener("keydown",keypressdown,false);
+	
+	addEventListener("keyup",keypressup,false);
+	
 	interval = setInterval(UpdatePosition, 150);
 	interval2 = setInterval(UpdateEnemyPosition, 300);
 }
@@ -370,16 +419,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[up_key]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[down_key]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[left_key]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[right_key]) {
 		return 4;
 	}
 }
@@ -545,12 +594,16 @@ function UpdatePosition() {
 	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
+		removeEventListener("keydown", keypressdown, false);
+		removeEventListener("keyup", keypressup, false);
 		window.alert("game over");
 		welcome();
 	}
 	if (score >= 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
+		removeEventListener("keydown", keypressdown, false);
+		removeEventListener("keyup", keypressup, false);
 		window.alert("Game completed");
 		welcome();
 	} else {
@@ -601,12 +654,16 @@ function UpdateEnemyPosition(){
 	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
+		removeEventListener("keydown", keypressdown, false);
+		removeEventListener("keyup", keypressup, false);
 		window.alert("game over");
 		welcome();
 	}
 	if (score >= 300 ) {
 		window.clearInterval(interval);
 		window.clearInterval(interval2);
+		removeEventListener("keydown", keypressdown, false);
+		removeEventListener("keyup", keypressup, false);
 		window.alert("Game completed");
 		welcome();
 	} else {
