@@ -1,6 +1,9 @@
 var context;
 var shape = new Object();
-var enemypos =new Object();
+var enemypos1 =new Object();
+var enemypos2 =new Object();
+var enemypos3 =new Object();
+var enemypos4 =new Object();
 var board;
 var board2;
 var lifepool;
@@ -15,7 +18,10 @@ var enemy_remain
 var player_name;
 var food_remain
 var interval;
+var interval1;
 var interval2;
+var interval3;
+var interval4;
 var temp=true;
 var dic_users = {'k':'k'}
 var enemy=new Image();
@@ -40,7 +46,7 @@ $(document).ready(function() {
 		game_time= $('#dotg').val();
 		if(game_time=="unlimit") game_time=9999;
 		game_time=parseFloat(game_time);
-		enemy_remain=$('#nof').val();
+		enemy_remain=$('#noe').val();
 		food_remain =$('#cdk').val();
 		lifepool=$('#life').val();
 		normal_color=$('#favcolor1').val();
@@ -220,7 +226,7 @@ function accept(){
 function welcome(){
 //1.page cleaning
 	window.clearInterval(interval);
-	window.clearInterval(interval2);
+	window.clearInterval(interval1);
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.beginPath();
 //2.	
@@ -310,7 +316,6 @@ function Start() {
 	var magick = Math.round(food_remain*0.3);
 	var epic = Math.round(food_remain*0.1);
 	var pacman_remain = 1;
-	enemy_remain = 1;
 	start_time = new Date();
 	steptime=start_time;
 	for (var i = 0; i < 10; i++) {
@@ -335,25 +340,46 @@ function Start() {
 				(i == 9 && j == 9) 
 			){
 				if(i == 0 && j == 0){
-				enemypos.i=i;
-				enemypos.ib=i;
-				enemypos.j=j;
-				enemypos.jb=j
+				enemypos1.i=i;
+				enemypos1.ib=i;
+				enemypos1.j=j;
+				enemypos1.jb=j
 				board[i][j] = 5;
 				board2[i][j] = 5;
 				}
 				else if(i == 0 && j == 9){
-					board[i][j] = 5;
-					board2[i][j] = 0;
-				}
+					if(enemy_remain>1){
+						enemypos2.i=i;
+						enemypos2.ib=i;
+						enemypos2.j=j;
+						enemypos2.jb=j
+						board[i][j] = 5;
+						board2[i][j] = 5;}
+						board[i][j] = 5;
+						board2[i][j] = 0;
+						}
 				else if(i == 9 && j == 0){
-					board[i][j] = 5;
-					board2[i][j] = 0;
-				}
+					if(enemy_remain>2){
+						enemypos3.i=i;
+						enemypos3.ib=i;
+						enemypos3.j=j;
+						enemypos3.jb=j
+						board[i][j] = 5;
+						board2[i][j] = 5;}
+						board[i][j] = 5;
+						board2[i][j] = 0;
+						}
 				else if(i == 9 && j == 9){
-					board[i][j] = 5;
-					board2[i][j] = 0;
-				}
+					if(enemy_remain>3){
+						enemypos4.i=i;
+						enemypos4.ib=i;
+						enemypos4.j=j;
+						enemypos4.jb=j
+						board[i][j] = 5;
+						board2[i][j] = 5;}
+						board[i][j] = 5;
+						board2[i][j] = 0;
+						}
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * normal) / cnt) {
@@ -404,7 +430,8 @@ function Start() {
 	addEventListener("keyup",keypressup,false);
 	
 	interval = setInterval(UpdatePosition, 150);
-	interval2 = setInterval(UpdateEnemyPosition, 300);
+	interval1 = setInterval( UpdateEnemyPosition, 300);
+
 }
 
 function findRandomEmptyCell(board) {
@@ -592,7 +619,7 @@ function UpdatePosition() {
 	}
 	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
-		window.clearInterval(interval2);
+		window.clearInterval(interval1);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("game over");
@@ -600,7 +627,7 @@ function UpdatePosition() {
 	}
 	if (score >= 300 ) {
 		window.clearInterval(interval);
-		window.clearInterval(interval2);
+		window.clearInterval(interval1);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("Game completed");
@@ -612,47 +639,17 @@ function UpdatePosition() {
 }
 
 function UpdateEnemyPosition(){
-	board2[enemypos.i][enemypos.j] = 0;
-	var x=getBestMove();
-	enemypos.ib=enemypos.i;
-	enemypos.jb=enemypos.j;
-	if (x == 1) {
-		if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4) {
-			enemypos.j--;
-			
-		}
-	}
-	if (x == 2) {
-		if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4) {
-			enemypos.j++;
-			
-		}
-	}
-	if (x == 3) {
-
-		if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4) {
-			enemypos.i--;
-			
-		}
-	}
-	if (x == 4) {
-
-		if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4) {
-			enemypos.i++;
-			
-		}
-	}
-
-
-
-	board2[enemypos.i][enemypos.j]=5
+	moveEnemyX(enemypos1);
+	if(enemy_remain>1)moveEnemyX(enemypos2);
+	if(enemy_remain>2)moveEnemyX(enemypos3);
+	if(enemy_remain>3)moveEnemyX(enemypos4);
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	game_time=game_time-(currentTime-steptime)/1000;
 	steptime=currentTime;
 	if(lifepool<=0 || game_time<=0){
 		window.clearInterval(interval);
-		window.clearInterval(interval2);
+		window.clearInterval(interval1);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("game over");
@@ -660,7 +657,7 @@ function UpdateEnemyPosition(){
 	}
 	if (score >= 300 ) {
 		window.clearInterval(interval);
-		window.clearInterval(interval2);
+		window.clearInterval(interval1);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("Game completed");
@@ -669,24 +666,61 @@ function UpdateEnemyPosition(){
 		Draw();
 	}
 }
-function getBestMove(){
+function moveEnemyX(enemyposX){
+	board2[enemyposX.i][enemyposX.j] = 0;
+	var x=getBestMove(enemyposX);
+	enemyposX.ib=enemyposX.i;
+	enemyposX.jb=enemyposX.j;
+	if (x == 1) {
+		if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4) {
+			enemyposX.j--;
+			
+		}
+	}
+	if (x == 2) {
+		if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4) {
+			enemyposX.j++;
+			
+		}
+	}
+	if (x == 3) {
+
+		if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4) {
+			enemyposX.i--;
+			
+		}
+	}
+	if (x == 4) {
+
+		if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4) {
+			enemyposX.i++;
+			
+		}
+	}
+
+
+
+	board2[enemyposX.i][enemyposX.j]=5
+}
+
+function getBestMove(enemyposX){
 	var a=[100,100,100,100];
 	var b=0;
 	var c=100;
-	if (enemypos.j > 0 && board[enemypos.i][enemypos.j - 1] != 4 && enemypos.j-1 !=enemypos.jb){
-		a[0]=Math.abs(enemypos.i-shape.i) + Math.abs((enemypos.j-1)-shape.j);
+	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb){
+		a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);
 		if(a[0]<c) {b=1;c=a[0]}
 	}
-	if (enemypos.j < 9 && board[enemypos.i][enemypos.j + 1] != 4 && enemypos.j+1 !=enemypos.jb) {
-		a[1]=Math.abs(enemypos.i-shape.i) + Math.abs((enemypos.j+1)-shape.j);
+	if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb) {
+		a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);
 		if(a[1]<c) {b=2;c=a[1]}
 	}
-	if (enemypos.i > 0 && board[enemypos.i - 1][enemypos.j] != 4 && enemypos.i-1 !=enemypos.ib) {
-		a[2]=Math.abs((enemypos.i-1)-shape.i) + Math.abs(enemypos.j-shape.j);
+	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib) {
+		a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[2]<c) {b=3;c=a[2]}
 	}
-	if (enemypos.i < 9 && board[enemypos.i + 1][enemypos.j] != 4 && enemypos.i+1 !=enemypos.ib) {
-		a[3]=Math.abs((enemypos.i+1)-shape.i) + Math.abs(enemypos.j-shape.j);
+	if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib) {
+		a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[3]<c) {b=4;c=a[3]};
 	}
 	return b
