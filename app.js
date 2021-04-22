@@ -31,6 +31,7 @@ var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt
 var magick_color;
 var epic_color;
 var superfoodcolor="red";
+var isPaused=false;
 var up_key=38;
 var down_key=40;
 var left_key=37;
@@ -87,6 +88,13 @@ $(document).ready(function() {
 
 	});
 
+	$('#pause').on('click', function(e) {
+		e.preventDefault();
+		if(isPaused)
+			isPaused = false;
+		else
+			isPaused = true;
+	  });
 
 	$('#log_form').submit(function(e){
 		e.preventDefault();
@@ -615,156 +623,159 @@ function Draw() {
 }
 
 function UpdatePosition() {
-	board[shape.i][shape.j] = 0;
-	var x = GetKeyPressed();
-	if (x == 1) {
-		pac_pos = 2.3;
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
-			shape.j--;
-			
-		}
-	}
-	if (x == 2) {
-		pac_pos = 2.2;
-		 if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
-			shape.j++;
-			
-		}
-	}
-	if (x == 3) {
-		pac_pos = 2.1;
-		
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
-			shape.i--;
-			
-		}
-	}
-	if (x == 4) {
-		pac_pos= 2;
-
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
-			shape.i++;
-			
-		}
-	}
-	if(board2[shape.i][shape.j] == 5){
-		lifepool--;
-		score-=10
-		var temp=findRandomEmptyCell(board);
-		shape.i=temp[0];
-		shape.j=temp[1];
-	}
-	if(board2[shape.i][shape.j] == 10){
-		score+=50;
-		board2[shape.i][shape.j]=0
-		window.clearInterval(interval2);
-	}
-	if (board[shape.i][shape.j] == 1) {
-		score+=5;
-	}
-	else if (board[shape.i][shape.j] == 1.1) {
-		score+=15;
-	}
-	else if (board[shape.i][shape.j] == 1.2) {
-		score+=25;
-	}
-	board[shape.i][shape.j]=pac_pos
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	game_time=game_time-(currentTime-steptime)/1000;
-	steptime=currentTime;
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-	if(lifepool<=0){
-		Draw();
-		window.clearInterval(interval);
-		window.clearInterval(interval1);
-		window.clearInterval(interval2);
-		removeEventListener("keydown", keypressdown, false);
-		removeEventListener("keyup", keypressup, false);
-		window.alert("Loser!");
-		welcome();
-	}
-	if (game_time<=0) {
-		Draw();
-		window.clearInterval(interval);
-		window.clearInterval(interval1);
-		window.clearInterval(interval2);
-		removeEventListener("keydown", keypressdown, false);
-		removeEventListener("keyup", keypressup, false);
-		if(score<100)
-			window.alert("You are better then "+score+" points!");
-		else
-			window.alert("Winner!!!");
-		welcome();
-	} else {
-		Draw();
-	}
-	
-}
-
-function UpdatePositionsuperfood() {
-	board2[superfoodpos.i][superfoodpos.j] = 0;
-	var bool=true
-	while(bool){
-		var x = Math.floor(Math.random() * 4)+1;
+	if(!isPaused){
+		board[shape.i][shape.j] = 0;
+		var x = GetKeyPressed();
 		if (x == 1) {
-			if (superfoodpos.j > 0 && board[superfoodpos.i][superfoodpos.j - 1] != 4
-				&& board2[superfoodpos.i][superfoodpos.j - 1] != 5) {
-				superfoodpos.j--;
-				superfoodcolor="red"
-				bool=false;
+			pac_pos = 2.3;
+			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+				shape.j--;
+
 			}
 		}
 		if (x == 2) {
-			 if (superfoodpos.j < 9 && board[superfoodpos.i][superfoodpos.j + 1] != 4
-				&& board2[superfoodpos.i][superfoodpos.j + 1] != 5) {
-				superfoodpos.j++;
-				superfoodcolor="blue"
-				bool=false;
+			pac_pos = 2.2;
+			 if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+				shape.j++;
+
 			}
 		}
 		if (x == 3) {
+			pac_pos = 2.1;
 
-			if (superfoodpos.i > 0 && board[superfoodpos.i - 1][superfoodpos.j] != 4
-				 && board2[superfoodpos.i - 1][superfoodpos.j] != 5) {
-				superfoodpos.i--;
-				superfoodcolor="green"
-				bool=false;
+			if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+				shape.i--;
+
 			}
 		}
 		if (x == 4) {
+			pac_pos= 2;
 
-			if (superfoodpos.i < 9 && board[superfoodpos.i + 1][superfoodpos.j] != 4
-				&& board2[superfoodpos.i + 1][superfoodpos.j] != 5) {
-				superfoodpos.i++;
-				superfoodcolor="orange"
-				bool=false;
+			if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+				shape.i++;
+
 			}
 		}
+		if(board2[shape.i][shape.j] == 5){
+			lifepool--;
+			score-=10
+			var temp=findRandomEmptyCell(board);
+			shape.i=temp[0];
+			shape.j=temp[1];
+		}
+		if(board2[shape.i][shape.j] == 10){
+			score+=50;
+			board2[shape.i][shape.j]=0
+			window.clearInterval(interval2);
+		}
+		if (board[shape.i][shape.j] == 1) {
+			score+=5;
+		}
+		else if (board[shape.i][shape.j] == 1.1) {
+			score+=15;
+		}
+		else if (board[shape.i][shape.j] == 1.2) {
+			score+=25;
+		}
+		board[shape.i][shape.j]=pac_pos
+		var currentTime = new Date();
+		time_elapsed = (currentTime - start_time) / 1000;
+		game_time=game_time-(currentTime-steptime)/1000;
+		steptime=currentTime;
+		if (score >= 20 && time_elapsed <= 10) {
+			pac_color = "green";
+		}
+		if(lifepool<=0){
+			Draw();
+			window.clearInterval(interval);
+			window.clearInterval(interval1);
+			window.clearInterval(interval2);
+			removeEventListener("keydown", keypressdown, false);
+			removeEventListener("keyup", keypressup, false);
+			window.alert("Loser!");
+			welcome();
+		}
+		if (game_time<=0) {
+			Draw();
+			window.clearInterval(interval);
+			window.clearInterval(interval1);
+			window.clearInterval(interval2);
+			removeEventListener("keydown", keypressdown, false);
+			removeEventListener("keyup", keypressup, false);
+			if(score<100)
+				window.alert("You are better then "+score+" points!");
+			else
+				window.alert("Winner!!!");
+			welcome();
+		} else {
+			Draw();
+		}
 	}
-	board2[superfoodpos.i][superfoodpos.j]=10
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	game_time=game_time-(currentTime-steptime)/1000;
-	steptime=currentTime;
-	Draw();
-	
+}
+
+function UpdatePositionsuperfood() {
+		if(!isPaused){
+		board2[superfoodpos.i][superfoodpos.j] = 0;
+		var bool=true
+		while(bool){
+			var x = Math.floor(Math.random() * 4)+1;
+			if (x == 1) {
+				if (superfoodpos.j > 0 && board[superfoodpos.i][superfoodpos.j - 1] != 4
+					&& board2[superfoodpos.i][superfoodpos.j - 1] != 5) {
+					superfoodpos.j--;
+					superfoodcolor="red"
+					bool=false;
+				}
+			}
+			if (x == 2) {
+				 if (superfoodpos.j < 9 && board[superfoodpos.i][superfoodpos.j + 1] != 4
+					&& board2[superfoodpos.i][superfoodpos.j + 1] != 5) {
+					superfoodpos.j++;
+					superfoodcolor="blue"
+					bool=false;
+				}
+			}
+			if (x == 3) {
+
+				if (superfoodpos.i > 0 && board[superfoodpos.i - 1][superfoodpos.j] != 4
+					 && board2[superfoodpos.i - 1][superfoodpos.j] != 5) {
+					superfoodpos.i--;
+					superfoodcolor="green"
+					bool=false;
+				}
+			}
+			if (x == 4) {
+
+				if (superfoodpos.i < 9 && board[superfoodpos.i + 1][superfoodpos.j] != 4
+					&& board2[superfoodpos.i + 1][superfoodpos.j] != 5) {
+					superfoodpos.i++;
+					superfoodcolor="orange"
+					bool=false;
+				}
+			}
+		}
+		board2[superfoodpos.i][superfoodpos.j]=10
+		var currentTime = new Date();
+		time_elapsed = (currentTime - start_time) / 1000;
+		game_time=game_time-(currentTime-steptime)/1000;
+		steptime=currentTime;
+		Draw();
+	}
 }
 
 
 function UpdateEnemyPosition(){
-	moveEnemyX(enemypos1);
-	if(enemy_remain>1)moveEnemyX(enemypos2);
-	if(enemy_remain>2)moveEnemyX(enemypos3);
-	if(enemy_remain>3)moveEnemyX(enemypos4);
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	game_time=game_time-(currentTime-steptime)/1000;
-	steptime=currentTime;
-	Draw();
-	
+	if(!isPaused){
+		moveEnemyX(enemypos1);
+		if(enemy_remain>1)moveEnemyX(enemypos2);
+		if(enemy_remain>2)moveEnemyX(enemypos3);
+		if(enemy_remain>3)moveEnemyX(enemypos4);
+		var currentTime = new Date();
+		time_elapsed = (currentTime - start_time) / 1000;
+		game_time=game_time-(currentTime-steptime)/1000;
+		steptime=currentTime;
+		Draw();
+	}	
 }
 function moveEnemyX(enemyposX){
 	board2[enemyposX.i][enemyposX.j] = 0;
