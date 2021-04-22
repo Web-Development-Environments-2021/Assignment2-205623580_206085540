@@ -670,24 +670,27 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if(lifepool<=0 || game_time<=0){
+	if(lifepool<=0){
 		Draw();
 		window.clearInterval(interval);
 		window.clearInterval(interval1);
 		window.clearInterval(interval2);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
-		window.alert("game over");
+		window.alert("Loser!");
 		welcome();
 	}
-	if (score >= 300 ) {
+	if (game_time<=0) {
 		Draw();
 		window.clearInterval(interval);
 		window.clearInterval(interval1);
 		window.clearInterval(interval2);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
-		window.alert("Game completed");
+		if(score<100)
+			window.alert("You are better then "+score+" points!");
+		else
+			window.alert("Winner!!!");
 		welcome();
 	} else {
 		Draw();
