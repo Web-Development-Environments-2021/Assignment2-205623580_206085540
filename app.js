@@ -344,8 +344,56 @@ function Login(){
 
 
 function Start() {
-	board = new Array();
-	board2 =new Array();
+	board = 
+	[
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4],
+		[4, 4, 0, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 0, 4, 4],
+		[4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+	];//22x19
+	board2 =
+	[
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4, 0, 4, 4, 4, 4],
+		[4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 0, 4, 4, 4, 0, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4],
+		[4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4],
+		[4, 4, 0, 4, 0, 4, 0, 4, 4, 4, 4, 4, 0, 4, 0, 4, 0, 4, 4],
+		[4, 0, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 4],
+		[4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4],
+		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+	];//22x19
 	lblpname.value=player_name;
 	score = 0;
 	pac_color = "yellow";
@@ -358,7 +406,7 @@ function Start() {
 	var pacman_remain = 1;
 	start_time = new Date();
 	steptime=start_time;
-	for (var i = 0; i < 10; i++) {
+/*	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
 		board2[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -454,14 +502,52 @@ function Start() {
 				cnt--;
 			}
 		}
+	}*/
+	if(enemy_remain>0){
+		enemypos1.i=1;
+		enemypos1.ib=1;
+		enemypos1.j=1;
+		enemypos1.jb=1;
+		board[1][1] = 11;
+		board2[1][1] = 5;
 	}
-	while (superf > 0) {
+	if(enemy_remain>1){
+		enemypos2.i=2;
+		enemypos2.ib=2;
+		enemypos2.j=17;
+		enemypos2.jb=17;
+		board[1][17] = 11;
+		board2[1][17] = 5;
+	}
+	if(enemy_remain>2){
+		enemypos3.i=20;
+		enemypos3.ib=20;
+		enemypos3.j=2;
+		enemypos3.jb=2;
+		board[20][1] = 11;
+		board2[20][1] = 5;
+	}
+	if(enemy_remain>3){
+		enemypos4.i=20;
+		enemypos4.ib=20;
+		enemypos4.j=17;
+		enemypos4.jb=17;
+		board[20][17] = 11;
+		board2[20][17] = 5;
+	}
+	while(pacman_remain>0){
 		var emptyCell = findRandomEmptyCell(board);
-		board2[emptyCell[0]][emptyCell[1]] = 10;
-		superfoodpos.i=emptyCell[0];
-		superfoodpos.j=emptyCell[1];
-		superf--;
+		board[emptyCell[0]][emptyCell[1]] = 2;
+		board2[emptyCell[0]][emptyCell[1]] = 2;
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+		pacman_remain--;
 	}
+
+		board2[10][emptyCell[9]] = 10;
+		superfoodpos.i=emptyCell[10];
+		superfoodpos.j=emptyCell[9];
+
 	while (normal > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
@@ -489,11 +575,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * 21 + 1);
+	var j = Math.floor(Math.random() * 18 + 1);
 	while (board[i][j] != 0 || board2[i][j]==5) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 21 + 1);
+		j = Math.floor(Math.random() * 18 + 1);
 	}
 	return [i, j];
 }
@@ -519,15 +605,15 @@ function Draw() {
 	lblTime.value = game_time.toFixed(2);
 	lblLife.value=lifepool;
 	
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 22; i++) {
+		for (var j = 0; j < 19; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * 30 + 15;
+			center.y = j * 30 + 15;
 			if (board2[i][j] == 5) 
 			{//enemy
 					context.beginPath();
-					context.drawImage(enemy,center.x-22.5,center.y-22.5);
+					context.drawImage(enemy,center.x-15,center.y-15);
 					//context.fillStyle = "grey"; //color
 					//context.fill();
 				//context.beginPath();
@@ -538,48 +624,48 @@ function Draw() {
 			else if (board[i][j] == 2) 
 			{//right
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.arc(center.x, center.y, 15, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x + 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 2.1) 
 			{//left
 				context.beginPath();
-				context.arc(center.x, center.y, 30,  1.15 * Math.PI,0.85* Math.PI); // half circle
+				context.arc(center.x, center.y, 15,  1.15 * Math.PI,0.85* Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x - 2.5, center.y - 7.5, 2.5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 2.2) 
 			{//down
 				context.beginPath();
-				context.arc(center.x, center.y, 30,  0.65 * Math.PI,2.35* Math.PI); // half circle
+				context.arc(center.x, center.y, 15,  0.65 * Math.PI,2.35* Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x - 15, center.y + 5, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x - 7.5, center.y + 2.5, 2.5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 2.3) 
 			{//up
 				context.beginPath();
-				context.arc(center.x, center.y, 30,   1.65 * Math.PI,1.35* Math.PI); // half circle
+				context.arc(center.x, center.y, 15,   1.65 * Math.PI,1.35* Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x - 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x - 7.5, center.y - 2.5, 2.5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
@@ -594,25 +680,25 @@ function Draw() {
 			 else if (board[i][j] == 1) 
 			 {//food normal
 				context.beginPath();
-				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = normal_color; //color
 				context.fill();
 			}else if (board[i][j] == 1.1) 
 			{//food magick
 			   context.beginPath();
-			   context.arc(center.x, center.y, 13, 0, 2 * Math.PI); // circle
+			   context.arc(center.x, center.y, 8, 0, 2 * Math.PI); // circle
 			   context.fillStyle = magick_color; //color
 			   context.fill();
 		   }else if (board[i][j] == 1.2) 
 		   {//food epic
 			  context.beginPath();
-			  context.arc(center.x, center.y, 17, 0, 2 * Math.PI); // circle
+			  context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
 			  context.fillStyle = epic_color; //color
 			  context.fill();
 		  } else if (board[i][j] == 4) 
 			{//wall
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - 15, center.y - 15, 30, 30);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
@@ -635,7 +721,7 @@ function UpdatePosition() {
 		}
 		if (x == 2) {
 			pac_pos = 2.2;
-			 if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+			 if (shape.j < 18 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
 
 			}
@@ -651,7 +737,7 @@ function UpdatePosition() {
 		if (x == 4) {
 			pac_pos= 2;
 
-			if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+			if (shape.i < 21 && board[shape.i + 1][shape.j] != 4) {
 				shape.i++;
 
 			}
@@ -728,7 +814,7 @@ function UpdatePositionsuperfood() {
 				}
 			}
 			if (x == 2) {
-				 if (superfoodpos.j < 9 && board[superfoodpos.i][superfoodpos.j + 1] != 4
+				 if (superfoodpos.j < 18 && board[superfoodpos.i][superfoodpos.j + 1] != 4
 					&& board2[superfoodpos.i][superfoodpos.j + 1] != 5) {
 					superfoodpos.j++;
 					superfoodcolor="blue"
@@ -746,7 +832,7 @@ function UpdatePositionsuperfood() {
 			}
 			if (x == 4) {
 
-				if (superfoodpos.i < 9 && board[superfoodpos.i + 1][superfoodpos.j] != 4
+				if (superfoodpos.i < 21 && board[superfoodpos.i + 1][superfoodpos.j] != 4
 					&& board2[superfoodpos.i + 1][superfoodpos.j] != 5) {
 					superfoodpos.i++;
 					superfoodcolor="orange"
@@ -789,7 +875,7 @@ function moveEnemyX(enemyposX){
 		}
 	}
 	if (x == 2) {
-		if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4) {
+		if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4) {
 			enemyposX.j++;
 			
 		}
@@ -803,7 +889,7 @@ function moveEnemyX(enemyposX){
 	}
 	if (x == 4) {
 
-		if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4) {
+		if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4) {
 			enemyposX.i++;
 			
 		}
@@ -823,7 +909,7 @@ function getBestMove(enemyposX){
 		a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);
 		if(a[0]<c) {b=1;c=a[0]}
 	}
-	if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
+	if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
 		&& board2[enemyposX.i][enemyposX.j + 1] != 5) {
 		a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);
 		if(a[1]<c) {b=2;c=a[1]}
@@ -833,7 +919,7 @@ function getBestMove(enemyposX){
 		a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[2]<c) {b=3;c=a[2]}
 	}
-	if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib
+	if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib
 		&& board2[enemyposX.i+1][enemyposX.j] != 5) {
 		a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[3]<c) {b=4;c=a[3]};
