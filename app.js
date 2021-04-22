@@ -36,9 +36,36 @@ var down_key=40;
 var left_key=37;
 var right_key=39;
 
+function randomVal(){
+	var select = document.getElementById('dotg');
+    var items = select.getElementsByTagName('option');
+    var index = Math.floor(Math.random() * items.length);
+    select.selectedIndex = index;
+	select = document.getElementById('noe');
+    items = select.getElementsByTagName('option');
+    index = Math.floor(Math.random() * items.length);
+    select.selectedIndex = index;
+	select = document.getElementById('cdk');
+    items = select.getElementsByTagName('option');
+    index = Math.floor(Math.random() * items.length);
+    select.selectedIndex = index;
+	select = document.getElementById('life');
+    items = select.getElementsByTagName('option');
+    index = Math.floor(Math.random() * items.length);
+    select.selectedIndex = index;
+	document.getElementById('favcolor1').value=getRandomColor();
+	document.getElementById('favcolor2').value=getRandomColor();
+	document.getElementById('favcolor3').value=getRandomColor();
+}
 
-
-
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+	  color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+  }
 enemy.src="enemy.png";
 
 $(document).ready(function() {
