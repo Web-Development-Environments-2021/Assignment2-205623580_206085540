@@ -365,6 +365,12 @@ function Start() {
 				board[i][j] = 4;
 				board2[i][j] = 4;
 			}
+			else if(i==4&&j==4){
+				board2[i][j] = 10;
+				superfoodpos.i=i;
+				superfoodpos.j=j;
+				superf--;
+			}	
 			else if(
 				(i == 0 && j == 0) ||
 				(i == 0 && j == 9) ||
