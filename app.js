@@ -25,13 +25,17 @@ var interval4;
 var temp=true;
 var dic_users = {'k':'k'}
 var enemy=new Image();
+var superfood=new Image();
+var superfoodpos =new Object();
 var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt) ball_color[0]-epic ball(25pt)
 var magick_color;
 var epic_color;
+var superfoodcolor="red";
 var up_key=38;
 var down_key=40;
 var left_key=37;
 var right_key=39;
+
 
 
 
@@ -315,6 +319,7 @@ function Start() {
 	var normal = Math.round(food_remain*0.6);
 	var magick = Math.round(food_remain*0.3);
 	var epic = Math.round(food_remain*0.1);
+	var superf=1;
 	var pacman_remain = 1;
 	start_time = new Date();
 	steptime=start_time;
@@ -409,6 +414,13 @@ function Start() {
 			}
 		}
 	}
+	while (superf > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board2[emptyCell[0]][emptyCell[1]] = 10;
+		superfoodpos.i=emptyCell[0];
+		superfoodpos.j=emptyCell[1];
+		superf--;
+	}
 	while (normal > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
@@ -430,7 +442,8 @@ function Start() {
 	addEventListener("keyup",keypressup,false);
 	
 	interval = setInterval(UpdatePosition, 150);
-	interval1 = setInterval( UpdateEnemyPosition, 300);
+	interval1 = setInterval( UpdateEnemyPosition, 310);
+	interval2 = setInterval( UpdatePositionsuperfood, 310);
 
 }
 
@@ -473,7 +486,7 @@ function Draw() {
 			if (board2[i][j] == 5) 
 			{//enemy
 					context.beginPath();
-					context.drawImage(enemy,center.x-20,center.y-20);
+					context.drawImage(enemy,center.x-22.5,center.y-22.5);
 					//context.fillStyle = "grey"; //color
 					//context.fill();
 				//context.beginPath();
@@ -527,6 +540,14 @@ function Draw() {
 				context.beginPath();
 				context.arc(center.x - 15, center.y - 5, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board2[i][j] == 10) 
+			{//superfood
+				context.beginPath();
+				context.rect(center.x - 10, center.y - 10, 20, 20)
+				context.lineTo(center.x, center.y);
+				context.fillStyle = superfoodcolor; //color
 				context.fill();
 			}
 			 else if (board[i][j] == 1) 
@@ -600,7 +621,12 @@ function UpdatePosition() {
 		shape.i=temp[0];
 		shape.j=temp[1];
 	}
-	else if (board[shape.i][shape.j] == 1) {
+	if(board2[shape.i][shape.j] == 10){
+		score+=50;
+		board2[shape.i][shape.j]=0
+		window.clearInterval(interval2);
+	}
+	if (board[shape.i][shape.j] == 1) {
 		score+=5;
 	}
 	else if (board[shape.i][shape.j] == 1.1) {
@@ -618,16 +644,20 @@ function UpdatePosition() {
 		pac_color = "green";
 	}
 	if(lifepool<=0 || game_time<=0){
+		Draw();
 		window.clearInterval(interval);
 		window.clearInterval(interval1);
+		window.clearInterval(interval2);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("game over");
 		welcome();
 	}
 	if (score >= 300 ) {
+		Draw();
 		window.clearInterval(interval);
 		window.clearInterval(interval1);
+		window.clearInterval(interval2);
 		removeEventListener("keydown", keypressdown, false);
 		removeEventListener("keyup", keypressup, false);
 		window.alert("Game completed");
@@ -638,6 +668,56 @@ function UpdatePosition() {
 	
 }
 
+function UpdatePositionsuperfood() {
+	board2[superfoodpos.i][superfoodpos.j] = 0;
+	var bool=true
+	while(bool){
+		var x = Math.floor(Math.random() * 4)+1;
+		if (x == 1) {
+			if (superfoodpos.j > 0 && board[superfoodpos.i][superfoodpos.j - 1] != 4
+				&& board2[superfoodpos.i][superfoodpos.j - 1] != 5) {
+				superfoodpos.j--;
+				superfoodcolor="red"
+				bool=false;
+			}
+		}
+		if (x == 2) {
+			 if (superfoodpos.j < 9 && board[superfoodpos.i][superfoodpos.j + 1] != 4
+				&& board2[superfoodpos.i][superfoodpos.j + 1] != 5) {
+				superfoodpos.j++;
+				superfoodcolor="blue"
+				bool=false;
+			}
+		}
+		if (x == 3) {
+
+			if (superfoodpos.i > 0 && board[superfoodpos.i - 1][superfoodpos.j] != 4
+				 && board2[superfoodpos.i - 1][superfoodpos.j] != 5) {
+				superfoodpos.i--;
+				superfoodcolor="green"
+				bool=false;
+			}
+		}
+		if (x == 4) {
+
+			if (superfoodpos.i < 9 && board[superfoodpos.i + 1][superfoodpos.j] != 4
+				&& board2[superfoodpos.i + 1][superfoodpos.j] != 5) {
+				superfoodpos.i++;
+				superfoodcolor="orange"
+				bool=false;
+			}
+		}
+	}
+	board2[superfoodpos.i][superfoodpos.j]=10
+	var currentTime = new Date();
+	time_elapsed = (currentTime - start_time) / 1000;
+	game_time=game_time-(currentTime-steptime)/1000;
+	steptime=currentTime;
+	Draw();
+	
+}
+
+
 function UpdateEnemyPosition(){
 	moveEnemyX(enemypos1);
 	if(enemy_remain>1)moveEnemyX(enemypos2);
@@ -647,24 +727,8 @@ function UpdateEnemyPosition(){
 	time_elapsed = (currentTime - start_time) / 1000;
 	game_time=game_time-(currentTime-steptime)/1000;
 	steptime=currentTime;
-	if(lifepool<=0 || game_time<=0){
-		window.clearInterval(interval);
-		window.clearInterval(interval1);
-		removeEventListener("keydown", keypressdown, false);
-		removeEventListener("keyup", keypressup, false);
-		window.alert("game over");
-		welcome();
-	}
-	if (score >= 300 ) {
-		window.clearInterval(interval);
-		window.clearInterval(interval1);
-		removeEventListener("keydown", keypressdown, false);
-		removeEventListener("keyup", keypressup, false);
-		window.alert("Game completed");
-		welcome();
-	} else {
-		Draw();
-	}
+	Draw();
+	
 }
 function moveEnemyX(enemyposX){
 	board2[enemyposX.i][enemyposX.j] = 0;
@@ -707,19 +771,23 @@ function getBestMove(enemyposX){
 	var a=[100,100,100,100];
 	var b=0;
 	var c=100;
-	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb){
+	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb
+		&& board2[enemyposX.i][enemyposX.j - 1] != 5){
 		a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);
 		if(a[0]<c) {b=1;c=a[0]}
 	}
-	if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb) {
+	if (enemyposX.j < 9 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
+		&& board2[enemyposX.i][enemyposX.j + 1] != 5) {
 		a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);
 		if(a[1]<c) {b=2;c=a[1]}
 	}
-	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib) {
+	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib
+		&& board2[enemyposX.i-1][enemyposX.j] != 5) {
 		a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[2]<c) {b=3;c=a[2]}
 	}
-	if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib) {
+	if (enemyposX.i < 9 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib
+		&& board2[enemyposX.i+1][enemyposX.j] != 5) {
 		a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);
 		if(a[3]<c) {b=4;c=a[3]};
 	}
