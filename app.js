@@ -84,7 +84,6 @@ $(document).ready(function() {
 		magick_color=$('#favcolor2').val();
 		epic_color=$('#favcolor3').val();
 		startgame();
-
 	});
 
 	$('#pause').on('click', function(e) {

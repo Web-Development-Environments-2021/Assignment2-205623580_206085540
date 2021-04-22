@@ -11,6 +11,15 @@
 
 }
 
+
+#canvas{
+position: absolute;
+position: relative;
+top: 70px;
+left: 2%;
+}
+
+
 .video-game-button {
 	text-shadow: 1px 1px pink, -1px -1px maroon;
 	line-height: 1.5em;
@@ -54,6 +63,54 @@
     box-shadow: 0 .2em gray; 
     cursor: pointer;
     width: 200px;
+}
+
+.pause-btn{
+  background: white;
+  text-align: center;
+	display: inline-block;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+    width: 200px;
+    margin-top: 20%;
+    margin-left: %;
+}
+
+.Dsetting{
+background: black;
+color: white;
+max-width: 10%;
+}
+
+#display_setting{
+  margin-top: -27%;
+  margin-left: 38%;
+margin-bottom: 1%;
+}
+
+
+
+.SNG-btn{
+  background: white;
+  text-align: center;
+	display: inline-block;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+    width: 200px;
+    margin-top: 20%;
+    margin-left: 20%;
 
 }
 .start-btn2{
@@ -73,6 +130,7 @@
     cursor: pointer;
     width: 200px;
 }
+
 
 #score{
   width: 100px;
@@ -102,14 +160,7 @@
   color: blueviolet;
   z-index:2
 }
-#game{
-  position:absolute; 
-  top: 200px; 
-  left: 250px;
-  text-shadow: 1px 1px pink, -1px -1px maroon;
-  color: blueviolet; 
-  z-index:2
-}
+
 .NOE{
 	
   width: 76%;
@@ -134,6 +185,7 @@
 	text-align: center;
   font-size: 16px;
 }
+
 .nof{
   text-shadow: 0 0 5px #e71506, 0 0 20px #15d3d3;
   color: #ffffff;
@@ -211,7 +263,8 @@ body {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 15px;
   color: #b9b9b9;
-  background-color: #e3e3e3;
+  background-color: Black;
+  
 }
 h4 {
   color: #7ed321;
