@@ -75,6 +75,7 @@ $(document).ready(function() {
 	$('#setting_form').submit(function(e){
 		e.preventDefault();
 		game_time= $('#dotg').val();
+		
 		if(game_time=="unlimit") game_time=9999;
 		game_time=parseFloat(game_time);
 		enemyNums=$('#noe').val();
@@ -83,6 +84,17 @@ $(document).ready(function() {
 		normal_color=$('#favcolor1').val();
 		magick_color=$('#favcolor2').val();
 		epic_color=$('#favcolor3').val();
+		document.getElementById('ds1').value=enemyNums;
+		document.getElementById('ds2').value=lifepool;
+		document.getElementById('ds3').value=food_remain;
+		document.getElementById('ds4').value=game_time;
+		document.getElementById('ds5').style.background=normal_color;
+		document.getElementById('ds6').style.background=magick_color;
+		document.getElementById('ds7').style.background=epic_color;
+		document.getElementById('ds8').value=document.getElementById("keyup").innerHTML;
+		document.getElementById('ds9').value=document.getElementById("keydown").innerHTML;
+		document.getElementById('ds10').value=document.getElementById("keyleft").innerHTML;
+		document.getElementById('ds11').value=document.getElementById("keyright").innerHTML;
 		startgame();
 	});
 
