@@ -285,7 +285,17 @@ x.style.display="none";
 var y=document.getElementById("welcome_menu");
 y.style.display="block";
 }
+function backToSetting(){
+	window.clearInterval(interval);
+	window.clearInterval(interval1);
+	window.clearInterval(interval2);
+	
+	var x=document.getElementById("game_menu");
+	x.style.display="none";
 
+	var setting=document.getElementById("setting_Screen");
+	setting.style.display="block";
+}
 function back(){
 	//1. hide the login screen
 	var login=document.getElementById("Login");
@@ -730,12 +740,18 @@ function UpdatePosition() {
 				shape.j--;
 
 			}
+			else if(shape.i==10 && shape.j==0){
+				shape.j=18
+			}
 		}
 		if (x == 2) {
 			pac_pos = 2.2;
 			 if (shape.j < 18 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
 
+			}
+			else if(shape.i==10 && shape.j==18){
+				shape.j=0
 			}
 		}
 		if (x == 3) {
@@ -809,6 +825,9 @@ function UpdatePosition() {
 			Draw();
 		}
 	}
+	else{
+		steptime = new Date();
+	}	
 }
 
 function UpdatePositionsuperfood() {
@@ -859,6 +878,9 @@ function UpdatePositionsuperfood() {
 		steptime=currentTime;
 		Draw();
 	}
+	else{
+		steptime = new Date();
+	}	
 }
 
 
@@ -873,6 +895,9 @@ function UpdateEnemyPosition(){
 		game_time=game_time-(currentTime-steptime)/1000;
 		steptime=currentTime;
 		Draw();
+	}
+	else{
+		steptime = new Date();
 	}	
 }
 function moveEnemyX(enemyposX){
