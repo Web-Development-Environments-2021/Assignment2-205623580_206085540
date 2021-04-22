@@ -26,6 +26,7 @@ var temp=true;
 var dic_users = {'k':'k'}
 var enemy=new Image();
 var superfood=new Image();
+var lifepiil=new Image();
 var superfoodpos =new Object();
 var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt) ball_color[0]-epic ball(25pt)
 var magick_color;
@@ -36,6 +37,7 @@ var up_key=38;
 var down_key=40;
 var left_key=37;
 var right_key=39;
+var timepill;
 
 function randomVal(){
 	var select = document.getElementById('dotg');
@@ -68,7 +70,7 @@ function getRandomColor() {
 	return color;
   }
 enemy.src="enemy.png";
-
+lifepiil.src="pill.png";
 $(document).ready(function() {
 
 	//Check the Validiation of Login form
@@ -289,7 +291,7 @@ function backToSetting(){
 	window.clearInterval(interval);
 	window.clearInterval(interval1);
 	window.clearInterval(interval2);
-	
+
 	var x=document.getElementById("game_menu");
 	x.style.display="none";
 
@@ -425,6 +427,7 @@ function Start() {
 	var superf=1;
 	var pacman_remain = 1;
 	start_time = new Date();
+	timepill= new Date();
 	steptime=start_time;
 /*	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -724,6 +727,11 @@ function Draw() {
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
+			else if (board[i][j] == 8) 
+			{//life pill
+				context.beginPath();
+				context.drawImage(lifepiil,center.x-15,center.y-5.5);
+		   }
 			
 			
 		}
@@ -777,10 +785,19 @@ function UpdatePosition() {
 			shape.i=temp[0];
 			shape.j=temp[1];
 		}
+		var timenow=new Date();
+		if(Math.floor((timenow-timepill)/1000)==20){
+			var temp=findRandomEmptyCell(board);
+			board[temp[0]][temp[1]]=8;
+			timepill=timenow;
+		}
 		if(board2[shape.i][shape.j] == 10){
 			score+=50;
 			board2[shape.i][shape.j]=0
 			window.clearInterval(interval2);
+		}
+		if(board[shape.i][shape.j] == 8){
+			lifepool++;
 		}
 		if (board[shape.i][shape.j] == 1) {
 			score+=5;
