@@ -907,13 +907,15 @@ function getBestMove(enemyposX){
 	var c=100;
 	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb
 		&& board2[enemyposX.i][enemyposX.j - 1] != 5){
+		if(!(enemyposX.j-1==3 && enemyposX.i==10)){	
 		a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);
-		if(a[0]<c) {b=1;c=a[0]}
+		if(a[0]<c) {b=1;c=a[0]}}
 	}
 	if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
 		&& board2[enemyposX.i][enemyposX.j + 1] != 5) {
+		if(!(enemyposX.j+1==15 && enemyposX.i==10)){
 		a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);
-		if(a[1]<c) {b=2;c=a[1]}
+		if(a[1]<c) {b=2;c=a[1]}}
 	}
 	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib
 		&& board2[enemyposX.i-1][enemyposX.j] != 5) {
