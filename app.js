@@ -14,7 +14,7 @@ var start_time;
 var time_elapsed;
 var steptime
 var game_time
-var enemy_remain
+var enemyNums
 var player_name;
 var food_remain
 var interval;
@@ -74,11 +74,10 @@ $(document).ready(function() {
 	//Check the Validiation of Login form
 	$('#setting_form').submit(function(e){
 		e.preventDefault();
-		var valid=0;
 		game_time= $('#dotg').val();
 		if(game_time=="unlimit") game_time=9999;
 		game_time=parseFloat(game_time);
-		enemy_remain=$('#noe').val();
+		enemyNums=$('#noe').val();
 		food_remain =$('#cdk').val();
 		lifepool=$('#life').val();
 		normal_color=$('#favcolor1').val();
@@ -503,7 +502,7 @@ function Start() {
 			}
 		}
 	}*/
-	if(enemy_remain>0){
+	if(enemyNums>0){
 		enemypos1.i=1;
 		enemypos1.ib=1;
 		enemypos1.j=1;
@@ -511,23 +510,23 @@ function Start() {
 		board[1][1] = 11;
 		board2[1][1] = 5;
 	}
-	if(enemy_remain>1){
-		enemypos2.i=2;
-		enemypos2.ib=2;
+	if(enemyNums>1){
+		enemypos2.i=1;
+		enemypos2.ib=1;
 		enemypos2.j=17;
 		enemypos2.jb=17;
 		board[1][17] = 11;
 		board2[1][17] = 5;
 	}
-	if(enemy_remain>2){
+	if(enemyNums>2){
 		enemypos3.i=20;
 		enemypos3.ib=20;
-		enemypos3.j=2;
-		enemypos3.jb=2;
+		enemypos3.j=1;
+		enemypos3.jb=1;
 		board[20][1] = 11;
 		board2[20][1] = 5;
 	}
-	if(enemy_remain>3){
+	if(enemyNums>3){
 		enemypos4.i=20;
 		enemypos4.ib=20;
 		enemypos4.j=17;
@@ -535,6 +534,10 @@ function Start() {
 		board[20][17] = 11;
 		board2[20][17] = 5;
 	}
+	board2[10][9] = 10;
+	board[10][9] = 10;
+	superfoodpos.i=10;
+	superfoodpos.j=9;
 	while(pacman_remain>0){
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2;
@@ -544,9 +547,7 @@ function Start() {
 		pacman_remain--;
 	}
 
-		board2[10][emptyCell[9]] = 10;
-		superfoodpos.i=emptyCell[10];
-		superfoodpos.j=emptyCell[9];
+	
 
 	while (normal > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -853,9 +854,9 @@ function UpdatePositionsuperfood() {
 function UpdateEnemyPosition(){
 	if(!isPaused){
 		moveEnemyX(enemypos1);
-		if(enemy_remain>1)moveEnemyX(enemypos2);
-		if(enemy_remain>2)moveEnemyX(enemypos3);
-		if(enemy_remain>3)moveEnemyX(enemypos4);
+		if(enemyNums>1)moveEnemyX(enemypos2);
+		if(enemyNums>2)moveEnemyX(enemypos3);
+		if(enemyNums>3)moveEnemyX(enemypos4);
 		var currentTime = new Date();
 		time_elapsed = (currentTime - start_time) / 1000;
 		game_time=game_time-(currentTime-steptime)/1000;
