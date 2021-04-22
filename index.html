@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="index.css" rel="stylesheet" type="text/css">
-
+		
 	</head>
 
 	<style>
@@ -28,6 +28,7 @@
 
 
 	<div id="game_menu"  style="display: none;">
+		<center>
 		<div id="score" style="display:inline-block;" >
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -49,9 +50,40 @@
 		</div>
 		<br>
 		<div id="pausee" style="display:inline-block;" >
-			<span id=pause class='start-btn1' >pause</span>
+			<span id=pause class='pause-btn' >Quit</span>
 		</div>
+		<div id="SNG"  style="display:inline-block;"> 
+			<span id=pause class='SNG-btn' >Start New Game</span>
 		</div>
+
+		<div id="display_setting" style="display:inline-block;">
+			<label > Number Of Enemy: </label>
+			<input  id="ds1" type="text" class="Dsetting" /><br>
+			<label >Number Of Life: </label>
+			<input id="ds2" type="text" class="Dsetting" /><br>
+			<label > Number Of Ball: </label>
+			<input id="ds3" type="text" class="Dsetting" /><br>
+			<label > Duration Of The Game: </label>
+			<input id="ds4" type="text" class="Dsetting"/><br>
+			<label > 5 Points Ball Color: </label>
+			<input id="ds5" type="text" class="Dsetting"/><br>
+			<label > 15 Points Ball Color: </label>
+			<input id="ds6" type="text" class="Dsetting"/><br>
+			<label > 25 Points Ball Color: </label>
+			<input id="ds7" type="text" class="Dsetting"/><br>
+			<label >UP: </label>
+			<input id="ds8" type="text" class="Dsetting"/><br>
+			<label > Down: </label>
+			<input id="ds9" type="text" class="Dsetting"/><br>
+			<label > Left: </label>
+			<input id="ds10" type="text" class="Dsetting"/><br>
+			<label >Right: </label>
+			<input id="ds11" type="text" class="Dsetting"/><br>
+			
+
+		</div>
+		</center>
+	</div>
 
 
 <!--div of Register-->
@@ -175,7 +207,6 @@
 			  </div>
 			  <a class="back" type="submit" onclick="back()">Back</a>
 			  <button class="back" type="submit" value="submit">Register</button>
-
 			  </button>
 			</form>
 		  </div>
