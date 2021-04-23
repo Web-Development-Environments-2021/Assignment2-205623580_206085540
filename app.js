@@ -824,7 +824,8 @@ function UpdatePosition() {
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
 			window.alert("Loser!");
-			welcome();
+			Draw();
+
 		}
 		if (game_time<=0) {
 			Draw();
@@ -833,11 +834,11 @@ function UpdatePosition() {
 			window.clearInterval(interval2);
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
+			Draw();
 			if(score<100)
 				window.alert("You are better then "+score+" points!");
 			else
 				window.alert("Winner!!!");
-			welcome();
 		} else {
 			Draw();
 		}
