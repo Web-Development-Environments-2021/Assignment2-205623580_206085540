@@ -903,10 +903,10 @@ function UpdatePositionsuperfood() {
 
 function UpdateEnemyPosition(){
 	if(!isPaused){
-		moveEnemyX(enemypos1);
-		if(enemyNums>1)moveEnemyX(enemypos2);
-		if(enemyNums>2)moveEnemyX(enemypos3);
-		if(enemyNums>3)moveEnemyX(enemypos4);
+		moveEnemyX2(enemypos1);
+		if(enemyNums>1)moveEnemyX2(enemypos2);
+		if(enemyNums>2)moveEnemyX2(enemypos3);
+		if(enemyNums>3)moveEnemyX2(enemypos4);
 		var currentTime = new Date();
 		time_elapsed = (currentTime - start_time) / 1000;
 		game_time=game_time-(currentTime-steptime)/1000;
@@ -917,9 +917,9 @@ function UpdateEnemyPosition(){
 		steptime = new Date();
 	}	
 }
-function moveEnemyX(enemyposX){
+function moveEnemyX(enemyposX,coin){
 	board2[enemyposX.i][enemyposX.j] = 0;
-	var x=getBestMove(enemyposX);
+	var x=getBestMove(enemyposX,coin);
 	enemyposX.ib=enemyposX.i;
 	enemyposX.jb=enemyposX.j;
 	if (x == 1) {
@@ -953,32 +953,245 @@ function moveEnemyX(enemyposX){
 
 	board2[enemyposX.i][enemyposX.j]=5
 }
+function moveEnemyX2(enemyposX){
+	board2[enemyposX.i][enemyposX.j]=0
+	var temp=astar(enemyposX)
+	enemyposX.i=temp.i
+	enemyposX.j=temp.j
+	board2[enemyposX.i][enemyposX.j]=5
+}
+function astar(enemyposX){
+	var openlist= new PriorityQueue();
+	enemyposX.val=hurstic(enemyposX);
+	enemyposX.g=0;
+	enemyposX.perv=0;
+	openlist.push(enemyposX);
+	var closelist={};
+	while (!openlist.isEmpty()){
+		var temppos=openlist.pop();
+		closelist[String(temppos.i)+String(temppos.j)]=1
+		if(temppos.j==shape.j && temppos.i==shape.i)
+			return getbestmoveupg(temppos)
+		else{
+			neighbors(temppos,openlist,closelist);
+		}
+		
+	}
+	var x = Math.floor(Math.random() * 4)+1;
+	if (x == 1) {
+		if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4) {
+			enemyposX.j--;
+			
+		}
+	}
+	if (x == 2) {
+		if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4) {
+			enemyposX.j++;
+			
+		}
+	}
+	if (x == 3) {
 
-function getBestMove(enemyposX){
+		if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4) {
+			enemyposX.i--;
+			
+		}
+	}
+	if (x == 4) {
+
+		if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4) {
+			enemyposX.i++;
+			
+		}
+	}
+	return enemyposX;
+}
+function getbestmoveupg(pos){
+	var perv;
+	while(pos.perv!=0){
+		perv=pos;
+		pos=pos.perv;
+	}
+	return perv;
+}
+
+function hurstic(enemyposX){
+	return Math.abs(enemyposX.i-shape.i) + Math.abs(enemyposX.j-shape.j);
+}
+function neighbors(pos,openlist,closelist){
+	if (pos.j > 0 && board[pos.i][pos.j - 1] != 4 
+		&& board2[pos.i][pos.j - 1] != 5){
+		var newpos=new Object();
+		newpos.i=pos.i;
+		newpos.j=pos.j - 1;
+		newpos.g=pos.g+1
+		newpos.val=newpos.g+hurstic(newpos);
+		newpos.perv=pos;
+		var strt=String(newpos.i)+(String(newpos.j));
+		if(!(String(newpos.i)+(String(newpos.j)) in closelist)){
+			if(openlist.notin(newpos)){
+				openlist.push(newpos)}}
+	}
+	if (pos.j < 18 && board[pos.i][pos.j + 1] != 4 
+		&& board2[pos.i][pos.j + 1] != 5){
+		var newpos=new Object();
+		newpos.i=pos.i;
+		newpos.j=pos.j + 1;
+		newpos.g=pos.g+1
+		newpos.val=newpos.g+hurstic(newpos);
+		newpos.perv=pos;
+
+		if(!(String(newpos.i)+(String(newpos.j)) in closelist)){
+			if(openlist.notin(newpos)){
+				openlist.push(newpos)}}
+	}
+	if (pos.i > 0 && board[pos.i-1][pos.j] != 4 
+		&& board2[pos.i-1][pos.j] != 5){
+		var newpos=new Object();
+		newpos.i=pos.i-1;
+		newpos.j=pos.j;
+		newpos.g=pos.g+1
+		newpos.val=newpos.g+hurstic(newpos);
+		newpos.perv=pos;
+		var strt=String(newpos.i)+(String(newpos.j));
+		if(!(String(newpos.i)+ (String(newpos.j)) in closelist)){
+			if(openlist.notin(newpos)){
+				openlist.push(newpos)}}
+	}
+	if (pos.i < 21 && board[pos.i+1][pos.j] != 4 
+		&& board2[pos.i+1][pos.j] != 5){
+		var newpos=new Object();
+		newpos.i=pos.i+1;
+		newpos.j=pos.j;
+		newpos.g=pos.g+1
+		newpos.val=newpos.g+hurstic(newpos);
+		newpos.perv=pos;
+		var strt=String(newpos.i)+(String(newpos.j));
+		if(!(String(newpos.i)+(String(newpos.j)) in closelist)){
+			if(openlist.notin(newpos)){
+				openlist.push(newpos)}}
+	}
+}
+
+function getBestMove(enemyposX,coin){
 	var a=[100,100,100,100];
 	var b=0;
 	var c=100;
 	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb
 		&& board2[enemyposX.i][enemyposX.j - 1] != 5){
 		if(!(enemyposX.j-1==3 && enemyposX.i==10)){	
-		a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);
+		if(coin==0){
+			a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);}
+		if(coin==1){
+			a[0]=((enemyposX.i-shape.i)**2 + ((enemyposX.j-1)-shape.j)**2)**0.5;
+		}
 		if(a[0]<c) {b=1;c=a[0]}}
 	}
 	if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
 		&& board2[enemyposX.i][enemyposX.j + 1] != 5) {
 		if(!(enemyposX.j+1==15 && enemyposX.i==10)){
-		a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);
+			if(coin==0){
+				a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);}
+			if(coin==1){
+				a[1]=((enemyposX.i-shape.i)**2 + ((enemyposX.j+1)-shape.j)**2)**0.5;
+			}
 		if(a[1]<c) {b=2;c=a[1]}}
 	}
 	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib
 		&& board2[enemyposX.i-1][enemyposX.j] != 5) {
-		a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);
+			if(coin==0){
+				a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);}
+			if(coin==1){
+				a[2]=(((enemyposX.i-1)-shape.i)**2 + (enemyposX.j-shape.j)**2)**0.5;
+			}
+		
 		if(a[2]<c) {b=3;c=a[2]}
 	}
 	if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib
 		&& board2[enemyposX.i+1][enemyposX.j] != 5) {
-		a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);
+			if(coin==0){
+				a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);}
+			if(coin==1){
+				a[3]=(((enemyposX.i+1)-shape.i)**2 + (enemyposX.j-shape.j)**2)**0.5;
+			}
 		if(a[3]<c) {b=4;c=a[3]};
 	}
 	return b
+}
+
+
+
+const topopo = 0;
+const parent = i => ((i + 1) >>> 1) - 1;
+const left = i => (i << 1) + 1;
+const right = i => (i + 1) << 1;
+
+class PriorityQueue {
+ 	 constructor(comparator = (a, b) => a.val < b.val) {
+ 	   this._heap = [];
+ 	   this._comparator = comparator;
+ 	 }
+ 	 size() {
+ 	   return this._heap.length;
+ 	 }
+ 	 isEmpty() {
+ 	   return this.size() == 0;
+ 	 }
+ 	 peek() {
+ 	   return this._heap[topopo];
+ 	 }
+ 	 push(...values) {
+ 	   values.forEach(value => {
+ 	     this._heap.push(value);
+ 	     this._siftUp();
+ 	   });
+ 	   return this.size();
+ 	 }
+ 	 pop() {
+ 	   const poppedValue = this.peek();
+ 	   const bottom = this.size() - 1;
+ 	   if (bottom > topopo) {
+ 	     this._swap(topopo, bottom);
+ 	   }
+ 	   this._heap.pop();
+ 	   this._siftDown();
+ 	   return poppedValue;
+ 	 }
+ 	 replace(value) {
+ 	   const replacedValue = this.peek();
+ 	   this._heap[topopo] = value;
+ 	   this._siftDown();
+ 	   return replacedValue;
+ 	 }
+		notin(val){
+			this._heap.forEach(element => {
+				if ((String(element.i)+(String(element.j))==(String(val.i)+(String(val.j))))) return false;
+				
+			});
+			return true
+		}
+ 	 _greater(i, j) {
+ 	   return this._comparator(this._heap[i], this._heap[j]);
+ 	 }
+ 	 _swap(i, j) {
+ 	   [this._heap[i], this._heap[j]] = [this._heap[j], this._heap[i]];
+ 	 }
+ 	 _siftUp() {
+ 	   let node = this.size() - 1;
+ 	   while (node > topopo && this._greater(node, parent(node))) {
+ 	     this._swap(node, parent(node));
+ 	     node = parent(node);
+ 	   }
+ 	 }
+ 	 _siftDown() {
+ 	   let node = topopo;
+ 	   while (
+ 	     (left(node) < this.size() && this._greater(left(node), node)) ||
+ 	     (right(node) < this.size() && this._greater(right(node), node))
+ 	   ) {
+ 	     let maxChild = (right(node) < this.size() && this._greater(right(node), left(node))) ? right(node) : left(node);
+ 	     this._swap(node, maxChild);
+ 	     node = maxChild;
+ 	   }
+ 	 }
 }
