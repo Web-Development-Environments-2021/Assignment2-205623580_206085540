@@ -4,6 +4,7 @@ var enemypos1 =new Object();
 var enemypos2 =new Object();
 var enemypos3 =new Object();
 var enemypos4 =new Object();
+var grimpos = new Object();
 var board;
 var board2;
 var lifepool;
@@ -14,6 +15,7 @@ var start_time;
 var time_elapsed;
 var steptime
 var game_time
+var grim_time;
 var enemyNums
 var player_name;
 var food_remain
@@ -27,6 +29,7 @@ var dic_users = {'k':'k'}
 var enemy=new Image();
 var superfood=new Image();
 var lifepiil=new Image();
+var grimrip=new Image();
 var superfoodpos =new Object();
 var normal_color;//ball_color[0]-normal ball(5 pt) ball_color[1]-magic ball(15pt) ball_color[0]-epic ball(25pt)
 var magick_color;
@@ -71,6 +74,7 @@ function getRandomColor() {
   }
 enemy.src="enemy.png";
 lifepiil.src="pill.png";
+grimrip.src="grimrip.png";
 $(document).ready(function() {
 
 	//Check the Validiation of Login form
@@ -291,6 +295,7 @@ function backToSetting(){
 	window.clearInterval(interval);
 	window.clearInterval(interval1);
 	window.clearInterval(interval2);
+	window.clearInterval(interval3);
 
 	var x=document.getElementById("game_menu");
 	x.style.display="none";
@@ -594,8 +599,9 @@ function Start() {
 	addEventListener("keyup",keypressup,false);
 	
 	interval = setInterval(UpdatePosition, 150);
-	interval1 = setInterval( UpdateEnemyPosition, 310);
-	interval2 = setInterval( UpdatePositionsuperfood, 310);
+	interval1 = setInterval( UpdateEnemyPosition, 300);
+	interval2 = setInterval( UpdatePositionsuperfood, 300);
+	interval3 = setInterval( grimripMove, 2000);
 
 }
 
@@ -608,7 +614,15 @@ function findRandomEmptyCell(board) {
 	}
 	return [i, j];
 }
-
+function findgrimCell(board) {
+	var i = Math.floor(Math.random() * 21 + 1);
+	var j = Math.floor(Math.random() * 18 + 1);
+	while (board[i][j] == 4 || board2[i][j]==5 || board2[i][j]==10) {
+		i = Math.floor(Math.random() * 21 + 1);
+		j = Math.floor(Math.random() * 18 + 1);
+	}
+	return [i, j];
+}
 function GetKeyPressed() {
 	if (keysDown[up_key]) {
 		return 1;
@@ -646,6 +660,11 @@ function Draw() {
 				//context.fillStyle = "red"; //color
 				//context.fill();
 			}
+			else if (board2[i][j] == 69) 
+			{//grimrip
+				context.beginPath();
+				context.drawImage(grimrip,center.x-14.5,center.y-15);
+		   }
 			else if (board[i][j] == 2) 
 			{//right
 				context.beginPath();
@@ -737,6 +756,18 @@ function Draw() {
 		}
 	}
 }
+function grimripMove(){
+	var temp=findgrimCell(board);
+	board2[temp[0]][temp[1]]=69
+	grimpos.i =temp[0]
+	grimpos.j =temp[1]
+	grim_time=new Date();
+	var currentTime = new Date();
+	time_elapsed = (currentTime - start_time) / 1000;
+	game_time=game_time-(currentTime-steptime)/1000;
+	steptime=currentTime;
+	Draw();
+}
 
 function UpdatePosition() {
 	if(!isPaused){
@@ -791,6 +822,16 @@ function UpdatePosition() {
 			board[temp[0]][temp[1]]=8;
 			timepill=timenow;
 		}
+		if(Math.floor((timenow-grim_time)/1000)==1){
+			board2[grimpos.i][grimpos.j]=0;
+		}
+		if(board2[shape.i][shape.j] == 69){
+			score-=100;
+			lifepool--
+			var temp=findRandomEmptyCell(board);
+			shape.i=temp[0];
+			shape.j=temp[1];
+		}
 		if(board2[shape.i][shape.j] == 10){
 			score+=50;
 			board2[shape.i][shape.j]=0
@@ -821,6 +862,7 @@ function UpdatePosition() {
 			window.clearInterval(interval);
 			window.clearInterval(interval1);
 			window.clearInterval(interval2);
+			window.clearInterval(interval3);
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
 			window.alert("Loser!");
@@ -832,6 +874,7 @@ function UpdatePosition() {
 			window.clearInterval(interval);
 			window.clearInterval(interval1);
 			window.clearInterval(interval2);
+			window.clearInterval(interval3);
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
 			Draw();
@@ -856,7 +899,7 @@ function UpdatePositionsuperfood() {
 			var x = Math.floor(Math.random() * 4)+1;
 			if (x == 1) {
 				if (superfoodpos.j > 0 && board[superfoodpos.i][superfoodpos.j - 1] != 4
-					&& board2[superfoodpos.i][superfoodpos.j - 1] != 5) {
+					&& board2[superfoodpos.i][superfoodpos.j - 1] != 5 && board2[superfoodpos.i][superfoodpos.j - 1] != 69) {
 					superfoodpos.j--;
 					superfoodcolor="red"
 					bool=false;
@@ -864,7 +907,7 @@ function UpdatePositionsuperfood() {
 			}
 			if (x == 2) {
 				 if (superfoodpos.j < 18 && board[superfoodpos.i][superfoodpos.j + 1] != 4
-					&& board2[superfoodpos.i][superfoodpos.j + 1] != 5) {
+					&& board2[superfoodpos.i][superfoodpos.j + 1] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
 					superfoodpos.j++;
 					superfoodcolor="blue"
 					bool=false;
@@ -873,7 +916,7 @@ function UpdatePositionsuperfood() {
 			if (x == 3) {
 
 				if (superfoodpos.i > 0 && board[superfoodpos.i - 1][superfoodpos.j] != 4
-					 && board2[superfoodpos.i - 1][superfoodpos.j] != 5) {
+					 && board2[superfoodpos.i - 1][superfoodpos.j] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
 					superfoodpos.i--;
 					superfoodcolor="green"
 					bool=false;
@@ -882,7 +925,7 @@ function UpdatePositionsuperfood() {
 			if (x == 4) {
 
 				if (superfoodpos.i < 21 && board[superfoodpos.i + 1][superfoodpos.j] != 4
-					&& board2[superfoodpos.i + 1][superfoodpos.j] != 5) {
+					&& board2[superfoodpos.i + 1][superfoodpos.j] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
 					superfoodpos.i++;
 					superfoodcolor="orange"
 					bool=false;
@@ -980,27 +1023,31 @@ function astar(enemyposX){
 	}
 	var x = Math.floor(Math.random() * 4)+1;
 	if (x == 1) {
-		if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4) {
+		if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4
+		&& board2[enemyposX.i][enemyposX.j - 1] != 5 && board2[enemyposX.i][enemyposX.j - 1] != 69) {
 			enemyposX.j--;
 			
 		}
 	}
 	if (x == 2) {
-		if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4) {
+		if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4
+			&& board2[enemyposX.i][enemyposX.j + 1] != 5 && board2[enemyposX.i][enemyposX.j + 1] != 69	) {
 			enemyposX.j++;
 			
 		}
 	}
 	if (x == 3) {
 
-		if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4) {
+		if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4
+			&& board2[enemyposX.i - 1][enemyposX.j] != 5 && board2[enemyposX.i - 1][enemyposX.j] != 69) {
 			enemyposX.i--;
 			
 		}
 	}
 	if (x == 4) {
 
-		if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4) {
+		if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4
+			&& board2[enemyposX.i][enemyposX.j + 1] != 5 && board2[enemyposX.i][enemyposX.j + 1] != 69) {
 			enemyposX.i++;
 			
 		}
@@ -1021,7 +1068,7 @@ function hurstic(enemyposX){
 }
 function neighbors(pos,openlist,closelist){
 	if (pos.j > 0 && board[pos.i][pos.j - 1] != 4 
-		&& board2[pos.i][pos.j - 1] != 5){
+		&& board2[pos.i][pos.j - 1] != 5 && board2[pos.i][pos.j - 1] != 69){
 		var newpos=new Object();
 		newpos.i=pos.i;
 		newpos.j=pos.j - 1;
@@ -1034,7 +1081,7 @@ function neighbors(pos,openlist,closelist){
 				openlist.push(newpos)}}
 	}
 	if (pos.j < 18 && board[pos.i][pos.j + 1] != 4 
-		&& board2[pos.i][pos.j + 1] != 5){
+		&& board2[pos.i][pos.j + 1] != 5 && board2[pos.i][pos.j + 1] != 69){
 		var newpos=new Object();
 		newpos.i=pos.i;
 		newpos.j=pos.j + 1;
@@ -1047,7 +1094,7 @@ function neighbors(pos,openlist,closelist){
 				openlist.push(newpos)}}
 	}
 	if (pos.i > 0 && board[pos.i-1][pos.j] != 4 
-		&& board2[pos.i-1][pos.j] != 5){
+		&& board2[pos.i-1][pos.j] != 5 && board2[pos.i-1][pos.j] != 69){
 		var newpos=new Object();
 		newpos.i=pos.i-1;
 		newpos.j=pos.j;
@@ -1060,7 +1107,7 @@ function neighbors(pos,openlist,closelist){
 				openlist.push(newpos)}}
 	}
 	if (pos.i < 21 && board[pos.i+1][pos.j] != 4 
-		&& board2[pos.i+1][pos.j] != 5){
+		&& board2[pos.i+1][pos.j] != 5&& board2[pos.i+1][pos.j] != 69){
 		var newpos=new Object();
 		newpos.i=pos.i+1;
 		newpos.j=pos.j;
