@@ -81,14 +81,27 @@
 	</div>
 		<br>
 		<div id="pausee" style="display:inline-block;" >
-			<span id=pause class='pause-btn' >Quit</span>
+			<span id=pause class='pause-btn' >Quit Game</span>
 		</div>
 		<div id="SNG"  style="display:inline-block;"> 
 			<span id=stnewgame class='SNG-btn' onclick="backToSetting()" >Start New Game</span>
 		</div>
-	</center>
 
+		<div id="About">
+			<span class='back' onclick="About()" >About</span>
+		</div>
+
+
+	</center>
 	</div>
+
+
+
+
+
+
+
+
 
 
 <!--div of Register-->
@@ -307,7 +320,30 @@
 
 
 
+
 	</body>
+
+<!-- The About_modal -->
+<div id="About_modal" class="modal" style="display: none;">
+	<!-- Modal content -->
+	<div class="modal-content">
+	  <div class="modal-header">
+		<span class="close">&times;</span>
+		<h2>About</h2>
+	  </div>
+	  <div class="modal-body">
+		<p>Some text in the Modal Body</p>
+		<p>Some other text...</p>
+	  </div>
+	  <div class="modal-footer">
+		<h3>Roi Peled:206085540 Roi Kremer:205623580 </h3>
+	  </div>
+	</div>
+  
+  </div>
+
+
+
 	<!-- Modal -->
 	<div id="myModal" class="modal">
 

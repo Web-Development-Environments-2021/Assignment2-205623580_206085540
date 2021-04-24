@@ -211,6 +211,45 @@ $(document).ready(function() {
 });
 
 
+
+
+function About(){
+	addEventListener("keydown",CloseAbout,false)
+	// Get the modal
+	var about=document.getElementById("About_modal")
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	about.style.display="block"
+
+	window.onclick = function(event) {
+		if (event.target == about) {
+			about.style.display = "none";
+		}
+	  }
+
+	// When the user clicks on <span> (x), close the modal
+	  span.onclick = function() {
+		about.style.display = "none";
+	  }
+
+
+
+}
+
+function CloseAbout(e){
+	var modal = document.querySelector('About_modal')
+	if(e.key==='Escape')
+	{
+		modal.style.display="none"
+		removeEventListener("keydown",CloseAbout,false)
+	}
+}
+
+
+
+
 function keypressdown(e) {
 	keysDown[e.keyCode] = true;
 }
