@@ -370,11 +370,17 @@ function accept(){
 }
 
 function welcome(){
-//1.page cleaning
-	window.clearInterval(interval);
-	window.clearInterval(interval1);
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.beginPath();
+	//1.page cleaning
+		window.clearInterval(interval);
+		window.clearInterval(interval1);
+		window.clearInterval(interval2);
+		window.clearInterval(interval3);
+		var song=document.getElementById("gamesong");
+		song.pause()
+		song.currentTime=0
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.beginPath();
+	
 //2.	
 var x=document.getElementById("game_menu");
 x.style.display="none";
@@ -387,6 +393,7 @@ function backToSetting(){
 	window.clearInterval(interval1);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
+
 	var song=document.getElementById("gamesong");
 	song.pause()
 	song.currentTime=0
@@ -396,6 +403,7 @@ function backToSetting(){
 	var setting=document.getElementById("setting_Screen");
 	setting.style.display="block";
 }
+
 function back(){
 	//1. hide the login screen
 	var login=document.getElementById("Login");
@@ -424,8 +432,8 @@ function Start_after_sign(){
 
 	var song=document.getElementById("mySong");
 	song.play();
-
 	//Start();
+	
 }
 function startgame(){
 
