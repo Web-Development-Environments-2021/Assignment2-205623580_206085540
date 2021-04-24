@@ -106,10 +106,19 @@ $(document).ready(function() {
 
 	$('#pause').on('click', function(e) {
 		e.preventDefault();
-		if(isPaused)
+		if(isPaused){
 			isPaused = false;
-		else
+			var song=document.getElementById("gamesong");
+			song.play()
+		}
+
+		else{
 			isPaused = true;
+			var song=document.getElementById("gamesong");
+			song.pause()
+		}
+		
+		
 	  });
 
 	$('#log_form').submit(function(e){
@@ -214,6 +223,8 @@ $(document).ready(function() {
 
 
 function About(){
+	var song=document.getElementById("gamesong");
+	song.pause()
 	isPaused=true;
 	addEventListener("keydown",CloseAbout,false)
 	// Get the modal
@@ -229,6 +240,7 @@ function About(){
 			about.style.display = "none";
 			removeEventListener("keydown",CloseAbout,false)
 			isPaused=false
+			song.play()
 		}
 	  }
 
@@ -237,6 +249,7 @@ function About(){
 		about.style.display = "none";
 		removeEventListener("keydown",CloseAbout,false)
 		isPaused=false
+		song.play()
 	  }
 
 
@@ -250,6 +263,8 @@ function CloseAbout(e){
 		modal.style.display="none"
 		removeEventListener("keydown",CloseAbout,false)
 		isPaused=false
+		var song=document.getElementById("gamesong");
+		song.play()
 	}
 }
 
@@ -341,7 +356,9 @@ function backToSetting(){
 	window.clearInterval(interval1);
 	window.clearInterval(interval2);
 	window.clearInterval(interval3);
-
+	var song=document.getElementById("gamesong");
+	song.pause()
+	song.currentTime=0
 	var x=document.getElementById("game_menu");
 	x.style.display="none";
 
@@ -386,7 +403,14 @@ function startgame(){
 	var x=document.getElementById("game_menu");
 	x.style.display="block";
 
+	var song=document.getElementById("mySong");
+	song.pause()
+	song.currentTime=0
 	Start();
+	
+	var song=document.getElementById("gamesong");
+	song.play()
+
 }
 function Register(){
 	//1. hide the div of menu
@@ -912,6 +936,9 @@ function UpdatePosition() {
 			window.clearInterval(interval1);
 			window.clearInterval(interval2);
 			window.clearInterval(interval3);
+			var song=document.getElementById("gamesong");
+			song.pause()
+			song.currentTime=0
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
 			window.alert("Loser!");
@@ -924,6 +951,9 @@ function UpdatePosition() {
 			window.clearInterval(interval1);
 			window.clearInterval(interval2);
 			window.clearInterval(interval3);
+			var song=document.getElementById("gamesong");
+			song.pause()
+			song.currentTime=0
 			removeEventListener("keydown", keypressdown, false);
 			removeEventListener("keyup", keypressup, false);
 			Draw();
