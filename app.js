@@ -239,7 +239,7 @@ function About(){
 }
 
 function CloseAbout(e){
-	var modal = document.querySelector('About_modal')
+	var modal = document.getElementById('About_modal')
 	if(e.key==='Escape')
 	{
 		modal.style.display="none"
