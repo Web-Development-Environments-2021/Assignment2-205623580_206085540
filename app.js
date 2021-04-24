@@ -342,6 +342,11 @@ function welcome(){
 //1.page cleaning
 	window.clearInterval(interval);
 	window.clearInterval(interval1);
+	window.clearInterval(interval2);
+	window.clearInterval(interval3);
+	var song=document.getElementById("gamesong");
+	song.pause()
+	song.currentTime=0
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.beginPath();
 //2.	
@@ -393,6 +398,7 @@ function Start_after_sign(){
 
 	var song=document.getElementById("mySong");
 	song.play();
+	song.volume=0.1;
 
 	//Start();
 }
@@ -410,6 +416,7 @@ function startgame(){
 	
 	var song=document.getElementById("gamesong");
 	song.play()
+	song.volume=0.05;
 
 }
 function Register(){
