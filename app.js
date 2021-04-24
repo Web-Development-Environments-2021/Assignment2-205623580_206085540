@@ -214,6 +214,7 @@ $(document).ready(function() {
 
 
 function About(){
+	isPaused=true;
 	addEventListener("keydown",CloseAbout,false)
 	// Get the modal
 	var about=document.getElementById("About_modal")
@@ -226,12 +227,16 @@ function About(){
 	window.onclick = function(event) {
 		if (event.target == about) {
 			about.style.display = "none";
+			removeEventListener("keydown",CloseAbout,false)
+			isPaused=false
 		}
 	  }
 
 	// When the user clicks on <span> (x), close the modal
 	  span.onclick = function() {
 		about.style.display = "none";
+		removeEventListener("keydown",CloseAbout,false)
+		isPaused=false
 	  }
 
 
@@ -244,6 +249,7 @@ function CloseAbout(e){
 	{
 		modal.style.display="none"
 		removeEventListener("keydown",CloseAbout,false)
+		isPaused=false
 	}
 }
 
@@ -796,16 +802,20 @@ function Draw() {
 	}
 }
 function grimripMove(){
-	var temp=findgrimCell(board);
-	board2[temp[0]][temp[1]]=69
-	grimpos.i =temp[0]
-	grimpos.j =temp[1]
-	grim_time=new Date();
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	game_time=game_time-(currentTime-steptime)/1000;
-	steptime=currentTime;
-	Draw();
+	if(!isPaused){
+		var temp=findgrimCell(board);
+		board2[temp[0]][temp[1]]=69
+		grimpos.i =temp[0]
+		grimpos.j =temp[1]
+		grim_time=new Date();
+		var currentTime = new Date();
+		time_elapsed = (currentTime - start_time) / 1000;
+		game_time=game_time-(currentTime-steptime)/1000;
+		steptime=currentTime;
+		Draw();}
+		else{
+			steptime = new Date();
+		}
 }
 
 function UpdatePosition() {
