@@ -41,6 +41,7 @@ var down_key=40;
 var left_key=37;
 var right_key=39;
 var timepill;
+var keyboz=false;
 
 function randomVal(){
 	var select = document.getElementById('dotg');
@@ -252,8 +253,6 @@ function About(){
 		song.play()
 	  }
 
-
-
 }
 
 function CloseAbout(e){
@@ -278,47 +277,79 @@ function keypressup(e) {
 	keysDown[e.keyCode] = false;
 }
 function keypressdownup(e) {
-	document.getElementById("keyup").innerHTML = e.key;
-	up_key=e.keyCode;
-	removeEventListener("keydown",keypressdownup,false);
+	if(e.keyCode!=left_key && e.keyCode!=right_key && e.keyCode!=down_key){
+		document.getElementById("keyup").innerHTML = e.key;
+		up_key=e.keyCode;
+		keyboz=false
+		removeEventListener("keydown",keypressdownup,false);
+	}
+	else
+		alert("You already used this key for other direction")
 }
 function keypressdownleft(e) {
-	document.getElementById("keyleft").innerHTML = e.key;
-	left_key=e.keyCode;
-	removeEventListener("keydown",keypressdownleft,false);
-}
-function keypressdowndown(e) {
-	document.getElementById("keydown").innerHTML = e.key;
-	down_key=e.keyCode;
-	removeEventListener("keydown",keypressdowndown,false);
-}
-function keypressdownright(e) {
-	document.getElementById("keyright").innerHTML = e.key;
-	right_key=e.keyCode;
-	removeEventListener("keydown",keypressdownright,false);
+	if(e.keyCode!=up_key && e.keyCode!=right_key && e.keyCode!=down_key){
+		document.getElementById("keyleft").innerHTML = e.key;
+		left_key=e.keyCode;
+		keyboz=false
+		removeEventListener("keydown",keypressdownleft,false);
+	}
+	else
+		alert("You already used this key for other direction")
 }
 
-function upKeyBind(){
+function keypressdowndown(e) {
+	if(e.keyCode!=up_key && e.keyCode!=right_key && e.keyCode!=left_key){
+		document.getElementById("keydown").innerHTML = e.key;
+		down_key=e.keyCode;
+		keyboz=false
+		removeEventListener("keydown",keypressdowndown,false);
+	}
+	else
+		alert("You already used this key for other direction")
 	
-	addEventListener("keydown",keypressdownup,false);
+}
+
+function keypressdownright(e) {
+	if(e.keyCode!=up_key && e.keyCode!=down_key && e.keyCode!=left_key){
+		document.getElementById("keyright").innerHTML = e.key;
+		right_key=e.keyCode;
+		keyboz=false
+		removeEventListener("keydown",keypressdownright,false);
+	}
+	else
+		alert("You already used this key for other direction")
+}
+
+
+function upKeyBind(){
+	if(!keyboz){
+		addEventListener("keydown",keypressdownup,false);
+		keyboz=true
+	}
 	//wait(3000);
 	//removeEventListener("keyd2",keypressdown2,false);
 }
 function leftKeyBind(){
-	
-	addEventListener("keydown",keypressdownleft,false);
+	if(!keyboz){
+		addEventListener("keydown",keypressdownleft,false);
+		keyboz=true
+	}		
 	//wait(3000);
 	//removeEventListener("keyd2",keypressdown2,false);
 }
 function downKeyBind(){
-	
-	addEventListener("keydown",keypressdowndown,false);
+	if(!keyboz){
+		addEventListener("keydown",keypressdowndown,false);
+		keyboz=true
+	}		
 	//wait(3000);
 	//removeEventListener("keyd2",keypressdown2,false);
 }
 function rightKeyBind(){
-	
-	addEventListener("keydown",keypressdownright,false);
+	if(!keyboz){
+		addEventListener("keydown",keypressdownright,false);
+		keyboz=true
+	}		
 	//wait(3000);
 	//removeEventListener("keyd2",keypressdown2,false);
 }
@@ -397,6 +428,12 @@ function Start_after_sign(){
 	//Start();
 }
 function startgame(){
+
+	removeEventListener("keydown",keypressdownright,false);
+	removeEventListener("keydown",keypressdownleft,false);
+	removeEventListener("keydown",keypressdownup,false);
+	removeEventListener("keydown",keypressdowndown,false);
+
 	var setting=document.getElementById("setting_Screen");
 	setting.style.display="none";
 
