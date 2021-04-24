@@ -34,7 +34,7 @@
 			<input id="lblScore" type="text" />
 		</div>
 		<div id="time"  style="display:inline-block;">
-			<label for="lblTime" >TIME:</label><br>
+			<label for="lblTime" >TIME:</label>
 			<input id="lblTime" type="text" />
 		</div>
 		<div id="lifepool"  style="display:inline-block;" >
@@ -44,16 +44,24 @@
 		<div id="pname"  style="display:inline-block;" >
 			<label for="lblpname">PLAYRENAME:</label>
 			<input id="lblpname" type="text" />
-		</div>
+		</div>	
+		<audio id="gamesong"  loop>
+			<source src="sounds/PAC-MAN - Main Theme (Hingamo Remix) (Epic EDM Dubstep House).mp3" type="audio/mp3">
+		</audio>
 	</center>
-	
+
 		<center>
 		<div class="wrapper">
-		<div></div>
+
+		<div style=" background-image:url(.jpg);"></div>
+		
 		<div id="game" >
 			<canvas id="canvas" height="603" width="700"></canvas>
 		</div>
 		<div id="display_setting" style="display:inline-block;">
+			<div id="About" style="display:inline-block;">
+				<span class='about-btn' onclick="About()" >About</span>
+			</div><br>
 			<label class="lb" > Number Of Enemy: </label>
 			<input  id="ds1" type="text" class="Dsetting" readonly /><br>
 			<label class="lb">Number Of Life: </label>
@@ -86,12 +94,6 @@
 		<div id="SNG"  style="display:inline-block;"> 
 			<span id=stnewgame class='SNG-btn' onclick="backToSetting()" >Start New Game</span>
 		</div>
-
-		<div id="About">
-			<span class='back' onclick="About()" >About</span>
-		</div>
-
-
 	</center>
 	</div>
 
@@ -232,8 +234,8 @@
 <!--div of Login-->
 <div id="Login" style="display: none;">
 	<center>
-		<p class="sign" align="center">Sign in</p>
 		<form id="log_form">
+			<p class="sign" align="center">Sign in</p>
 		  <input id="user_name_login" class="un " type="text" align="center" placeholder="Username"></br>
 		  <input id="password_login" class="pass" type="password" align="center" placeholder="Password"></br>
 		  <button class="submit" type="submit" align="center" >START</button>
@@ -332,11 +334,28 @@
 		<h2>About</h2>
 	  </div>
 	  <div class="modal-body">
-		<p>Some text in the Modal Body</p>
-		<p>Some other text...</p>
+		<p>	jquery plugin: "./jquery-3.4.1.slim.min.js"</p>
+		<p>                       "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"</p><br>
+		<p>We used with jquery for:</p>
+		<p>                                     1.swap between Divs (none and block)</p>
+		<p>                                     2.display error message when the user type invalid value  in the register and login forms</p>
+		<p>                                     3.For listeners</p>
+		<p>                                     4.Change the values of the objects in Html</p>
+		<p>                                     5.etc....</p><br>
+		<p>Difficulties:</p>
+		<p>                 1.build a AI algorithm for the Enemies (A* with Manhattan Distance ) </p>
+		<p>                 2.Disign with CSS</p>
+		<p>                 3.Build Listiner for the keyboard binding</p>
+		<p>                 4.Create a board and adjust him to size of the canvas</p>
+		<p>                 5.etc...</p><br>
+		<p>References:</p>
+		<p>                  - w3schools </p>
+		<p>                  - codepen</p>
+		<p>                  - stackoverflow</p>
+		<p>* We dont used with a full template but we took some code from there</p>
 	  </div>
 	  <div class="modal-footer">
-		<h3>Roi Peled:206085540 Roi Kremer:205623580 </h3>
+		<h3>Roi Peled: 206085540 Roi Kremer: 205623580 </h3>
 	  </div>
 	</div>
   
