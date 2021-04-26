@@ -935,6 +935,29 @@ function UpdatePosition() {
 			var temp=findRandomEmptyCell(board);
 			shape.i=temp[0];
 			shape.j=temp[1];
+			board2[enemypos1.i][enemypos1.j]=0
+			enemypos1.i=1
+			enemypos1.j=1
+			board2[enemypos1.i][enemypos1.j]=5
+			if(enemyNums>1){
+				board2[enemypos2.i][enemypos2.j]=0
+				enemypos2.i=1
+				enemypos2.j=17
+				board2[enemypos2.i][enemypos2.j]=5
+			}
+			if(enemyNums>2){
+				board2[enemypos3.i][enemypos3.j]=0
+				enemypos3.i=20
+				enemypos3.j=1
+				board2[enemypos3.i][enemypos3.j]=5
+			}
+			if(enemyNums>3){
+				board2[enemypos4.i][enemypos4.j]=0
+				enemypos4.i=20
+				enemypos4.j=17
+				board2[enemypos4.i][enemypos4.j]=5
+			}
+
 		}
 		var timenow=new Date();
 		if(Math.floor((timenow-timepill)/1000)==20){
