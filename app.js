@@ -63,6 +63,15 @@ function randomVal(){
 	document.getElementById('favcolor1').value=getRandomColor();
 	document.getElementById('favcolor2').value=getRandomColor();
 	document.getElementById('favcolor3').value=getRandomColor();
+	up_key=38;
+	down_key=40;
+	left_key=37;
+	right_key=39;
+	document.getElementById("keyup").innerHTML = "↑";
+	document.getElementById("keyleft").innerHTML = "←";
+	document.getElementById("keyright").innerHTML = "→";
+	document.getElementById("keydown").innerHTML = "↓";
+
 }
 
 function getRandomColor() {
