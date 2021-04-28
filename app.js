@@ -44,26 +44,38 @@ var timepill;
 var keyboz=false;
 
 
+//This function setting randomaly values for setting
 function randomVal(){
+	//duoraion of the game 
 	var select = document.getElementById('dotg');
     var items = select.getElementsByTagName('option');
     var index = Math.floor(Math.random() * items.length);
     select.selectedIndex = index;
+
+	//Number Of Enemy
 	select = document.getElementById('noe');
     items = select.getElementsByTagName('option');
     index = Math.floor(Math.random() * items.length);
     select.selectedIndex = index;
+
+	//Number Of Ball
 	select = document.getElementById('cdk');
     items = select.getElementsByTagName('option');
     index = Math.floor(Math.random() * items.length);
     select.selectedIndex = index;
+
+	//Life
 	select = document.getElementById('life');
     items = select.getElementsByTagName('option');
     index = Math.floor(Math.random() * items.length);
     select.selectedIndex = index;
+
+	//setting a random color
 	document.getElementById('favcolor1').value=getRandomColor();
 	document.getElementById('favcolor2').value=getRandomColor();
 	document.getElementById('favcolor3').value=getRandomColor();
+
+	//setting the difault keyboards
 	up_key=38;
 	down_key=40;
 	left_key=37;
@@ -83,9 +95,15 @@ function getRandomColor() {
 	}
 	return color;
   }
+
+
+//background images
 enemy.src="enemy.png";
 lifepiil.src="pill.png";
 grimrip.src="grimrip.png";
+
+
+
 $(document).ready(function() {
 
 	//Check the Validiation of Login form
@@ -115,6 +133,7 @@ $(document).ready(function() {
 		startgame();
 	});
 
+	//pause the game 
 	$('#pause').on('click', function(e) {
 		e.preventDefault();
 		if(isPaused){
@@ -129,9 +148,9 @@ $(document).ready(function() {
 			song.pause()
 		}
 		
-		
 	  });
 
+	//this responsibale on the login in - checking the validation of the values and display a message
 	$('#log_form').submit(function(e){
 		e.preventDefault();
 		var valid=0;
@@ -156,7 +175,7 @@ $(document).ready(function() {
 	//Check the Validiation of register form
 	$('#first_form').submit(function(e) {
 		e.preventDefault();
-		var valid=0;
+		var valid=0;//this means that all the values are valid!
 		var user_name = $('#user_name').val();
 		var Full_Name = $('#Full_Name').val();
 		var email = $('#email').val();
@@ -207,15 +226,16 @@ $(document).ready(function() {
 			valid=1;
 		}
 
+		//when all the values is valid the system diaplay a message and the user pressing "Accept"
+		//and send you to the login screen
 		if(valid==0){
-
 			dic_users[user_name]=password
 			var modal = document.getElementById("myModal");
 			modal.style.display="block";
+
 			// Get the <span> element that closes the modal
 			var span = document.getElementsByClassName("accept")[0];
 					
-			
 			// When the user clicks on <span> (x), close the modal
 			span.onclick = function() {
 			  modal.style.display = "none";
@@ -225,9 +245,8 @@ $(document).ready(function() {
 		}
 
 		});
-	context = canvas.getContext("2d");
-	//Start();
-	//welcome();
+		context = canvas.getContext("2d");
+
 });
 
 
@@ -238,6 +257,7 @@ function About(){
 	song.pause()
 	isPaused=true;
 	addEventListener("keydown",CloseAbout,false)
+
 	// Get the modal
 	var about=document.getElementById("About_modal")
 
@@ -246,6 +266,7 @@ function About(){
 
 	about.style.display="block"
 
+	//case: pressing out of the boxing
 	window.onclick = function(event) {
 		if (event.target == about) {
 			about.style.display = "none";
@@ -265,6 +286,7 @@ function About(){
 
 }
 
+//case: closing the boxing by pressing on "Escape" 
 function CloseAbout(e){
 	var modal = document.getElementById('About_modal')
 	if(e.key==='Escape')
@@ -277,15 +299,17 @@ function CloseAbout(e){
 	}
 }
 
-
-
-
+//check if keysDown is preessed
 function keypressdown(e) {
 	keysDown[e.keyCode] = true;
 }
+
+//check if keysDown is unpreessed
 function keypressup(e) {
 	keysDown[e.keyCode] = false;
 }
+
+//change the button after the pressing from user, also checking that every key is unique
 function keypressdownup(e) {
 	if(e.keyCode!=left_key && e.keyCode!=right_key && e.keyCode!=down_key){
 		document.getElementById("keyup").innerHTML = e.key;
@@ -296,6 +320,7 @@ function keypressdownup(e) {
 	else
 		alert("You already used this key for other direction")
 }
+
 function keypressdownleft(e) {
 	if(e.keyCode!=up_key && e.keyCode!=right_key && e.keyCode!=down_key){
 		document.getElementById("keyleft").innerHTML = e.key;
@@ -330,47 +355,34 @@ function keypressdownright(e) {
 		alert("You already used this key for other direction")
 }
 
-
+//Add a listener after the pressing
 function upKeyBind(){
 	if(!keyboz){
 		addEventListener("keydown",keypressdownup,false);
 		keyboz=true
 	}
-	//wait(3000);
-	//removeEventListener("keyd2",keypressdown2,false);
 }
 function leftKeyBind(){
 	if(!keyboz){
 		addEventListener("keydown",keypressdownleft,false);
 		keyboz=true
 	}		
-	//wait(3000);
-	//removeEventListener("keyd2",keypressdown2,false);
 }
 function downKeyBind(){
 	if(!keyboz){
 		addEventListener("keydown",keypressdowndown,false);
 		keyboz=true
 	}		
-	//wait(3000);
-	//removeEventListener("keyd2",keypressdown2,false);
 }
 function rightKeyBind(){
 	if(!keyboz){
 		addEventListener("keydown",keypressdownright,false);
 		keyboz=true
 	}		
-	//wait(3000);
-	//removeEventListener("keyd2",keypressdown2,false);
 }
-function wait(ms){
-	var start = new Date().getTime();
-	var end = start;
-	while(end < start + ms) {
-	  end = new Date().getTime();
-   }
- }
 
+
+//change the screen after register to login
 function accept(){
 	var reg=document.getElementById("Register");
 	reg.style.display="none";
@@ -378,6 +390,7 @@ function accept(){
 	var login=document.getElementById("Login");
 	login.style.display="block";
 }
+
 
 function welcome(){
 	//1.page cleaning
@@ -390,13 +403,14 @@ function welcome(){
 		song.currentTime=0
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		context.beginPath();
-//2.	
+//change the screen to welcome page (the main page)	
 var x=document.getElementById("game_menu");
 x.style.display="none";
-//
 var y=document.getElementById("welcome_menu");
 y.style.display="block";
 }
+
+
 function backToSetting(){
 	window.clearInterval(interval);
 	window.clearInterval(interval1);
@@ -413,6 +427,7 @@ function backToSetting(){
 	setting.style.display="block";
 }
 
+//button of back, change the screen to former screen(to welcome screen)
 function back(){
 	//1. hide the login screen
 	var login=document.getElementById("Login");
@@ -427,27 +442,22 @@ function back(){
 	y.style.display="block";	
 }
 
-
+//change the screen to setting screen after a valid connection
 function Start_after_sign(){
 	var Login=document.getElementById("Login")
 	Login.style.display="none";
 	
-	// var x=document.getElementById("game_menu");
-	// x.style.display="block";
-
 	var setting=document.getElementById("setting_Screen");
 	setting.style.display="block";
-
 
 	var song=document.getElementById("mySong");
 	song.play();
 	song.volume=0.1;
-
-	//Start();
 	
 }
-function startgame(){
 
+//change the screen to the game from setting screen
+function startgame(){
 	removeEventListener("keydown",keypressdownright,false);
 	removeEventListener("keydown",keypressdownleft,false);
 	removeEventListener("keydown",keypressdownup,false);
@@ -469,6 +479,7 @@ function startgame(){
 	song.volume=0.05;
 
 }
+
 function Register(){
 	//1. hide the div of menu
 	var x=document.getElementById("welcome_menu");
@@ -497,6 +508,8 @@ function Login(){
 
 
 function Start() {
+	//4-wall 0-free
+	//size 22x19
 	board = 
 	[
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
@@ -521,7 +534,10 @@ function Start() {
 		[4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4],
 		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
-	];//22x19
+	];
+
+	//board for enemy and special object
+	//22x19
 	board2 =
 	[
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
@@ -546,117 +562,25 @@ function Start() {
 		[4, 0, 4, 4, 4, 4, 4, 4, 0, 4, 0, 4, 4, 4, 4, 4, 4, 0, 4],
 		[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
 		[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
-	];//22x19
+	];
 	lblpname.value=player_name;
 	score = 0;
 	pac_color = "yellow";
-	//lifepool=1
+
 	var cnt = 100;
+	//3 kinds of balls
 	var normal = Math.round(food_remain*0.6);
 	var magick = Math.round(food_remain*0.3);
 	var epic = Math.round(food_remain*0.1);
+
 	var superf=1;
 	var pacman_remain = 1;
 	start_time = new Date();
 	timepill= new Date();
 	steptime=start_time;
-/*	for (var i = 0; i < 10; i++) {
-		board[i] = new Array();
-		board2[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = 4;
-				board2[i][j] = 4;
-			}
-			else if(i==4&&j==4){
-				board2[i][j] = 10;
-				superfoodpos.i=i;
-				superfoodpos.j=j;
-				superf--;
-			}	
-			else if(
-				(i == 0 && j == 0) ||
-				(i == 0 && j == 9) ||
-				(i == 9 && j == 0) ||
-				(i == 9 && j == 9) 
-			){
-				if(i == 0 && j == 0){
-				enemypos1.i=i;
-				enemypos1.ib=i;
-				enemypos1.j=j;
-				enemypos1.jb=j
-				board[i][j] = 5;
-				board2[i][j] = 5;
-				}
-				else if(i == 0 && j == 9){
-					if(enemy_remain>1){
-						enemypos2.i=i;
-						enemypos2.ib=i;
-						enemypos2.j=j;
-						enemypos2.jb=j
-						board[i][j] = 5;
-						board2[i][j] = 5;}
-						board[i][j] = 5;
-						board2[i][j] = 0;
-						}
-				else if(i == 9 && j == 0){
-					if(enemy_remain>2){
-						enemypos3.i=i;
-						enemypos3.ib=i;
-						enemypos3.j=j;
-						enemypos3.jb=j
-						board[i][j] = 5;
-						board2[i][j] = 5;}
-						board[i][j] = 5;
-						board2[i][j] = 0;
-						}
-				else if(i == 9 && j == 9){
-					if(enemy_remain>3){
-						enemypos4.i=i;
-						enemypos4.ib=i;
-						enemypos4.j=j;
-						enemypos4.jb=j
-						board[i][j] = 5;
-						board2[i][j] = 5;}
-						board[i][j] = 5;
-						board2[i][j] = 0;
-						}
-			} else {
-				var randomNum = Math.random();
-				if (randomNum <= (1.0 * normal) / cnt) {
-					normal--;
-					board[i][j] = 1;
-					board2[i][j] = 0;
-				}
-				else if (randomNum < (1.0 * (normal + magick)) / cnt) {
-					magick--;
-					board[i][j] = 1.1;
-					board2[i][j] = 0;
-				}else if (randomNum < (1.0 * (normal + magick + epic)) / cnt) {
-					epic--
-					board[i][j] = 1.2;
-					board2[i][j] = 0;
-				} else if (randomNum < (1.0 * (pacman_remain + normal + magick + epic)) / cnt) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = 2;
-					board2[i][j] = 2;
-				} else {
-					board[i][j] = 0;
-					board2[i][j] = 0;
-				}
-				cnt--;
-			}
-		}
-	}*/
+
+	//display enemy by the ammount
+	//5-enemy  11-first location of enemy  10-super food    
 	if(enemyNums>0){
 		enemypos1.i=1;
 		enemypos1.ib=1;
@@ -689,10 +613,14 @@ function Start() {
 		board[20][17] = 11;
 		board2[20][17] = 5;
 	}
+
+
 	board2[10][9] = 10;
 	board[10][9] = 10;
 	superfoodpos.i=10;
 	superfoodpos.j=9;
+
+	//loacte the pacmen and balls in the random cell
 	while(pacman_remain>0){
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2;
@@ -701,9 +629,6 @@ function Start() {
 		shape.j = emptyCell[1];
 		pacman_remain--;
 	}
-
-	
-
 	while (normal > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
@@ -719,9 +644,9 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 1.2;
 		epic--;
 	}
+
 	keysDown = {};
 	addEventListener("keydown",keypressdown,false);
-	
 	addEventListener("keyup",keypressup,false);
 	
 	interval = setInterval(UpdatePosition, 150);
@@ -740,6 +665,8 @@ function findRandomEmptyCell(board) {
 	}
 	return [i, j];
 }
+
+//bonus 1:
 function findgrimCell(board) {
 	var i = Math.floor(Math.random() * 21 + 1);
 	var j = Math.floor(Math.random() * 18 + 1);
@@ -749,6 +676,7 @@ function findgrimCell(board) {
 	}
 	return [i, j];
 }
+
 function GetKeyPressed() {
 	if (keysDown[up_key]) {
 		return 1;
@@ -763,6 +691,7 @@ function GetKeyPressed() {
 		return 4;
 	}
 }
+
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
@@ -779,12 +708,6 @@ function Draw() {
 			{//enemy
 					context.beginPath();
 					context.drawImage(enemy,center.x-15,center.y-15);
-					//context.fillStyle = "grey"; //color
-					//context.fill();
-				//context.beginPath();
-				//context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
-				//context.fillStyle = "red"; //color
-				//context.fill();
 			}
 			else if (board2[i][j] == 69) 
 			{//grimrip
@@ -882,6 +805,7 @@ function Draw() {
 		}
 	}
 }
+
 function grimripMove(){
 	if(!isPaused){
 		var temp=findgrimCell(board);
@@ -899,11 +823,12 @@ function grimripMove(){
 		}
 }
 
+
 function UpdatePosition() {
 	if(!isPaused){
 		board[shape.i][shape.j] = 0;
 		var x = GetKeyPressed();
-		if (x == 1) {
+		if (x == 1) {//up
 			pac_pos = 2.3;
 			if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 				shape.j--;
@@ -913,7 +838,7 @@ function UpdatePosition() {
 				shape.j=18
 			}
 		}
-		if (x == 2) {
+		if (x == 2) {//down
 			pac_pos = 2.2;
 			 if (shape.j < 18 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
@@ -923,7 +848,7 @@ function UpdatePosition() {
 				shape.j=0
 			}
 		}
-		if (x == 3) {
+		if (x == 3) {//left
 			pac_pos = 2.1;
 
 			if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
@@ -931,7 +856,7 @@ function UpdatePosition() {
 
 			}
 		}
-		if (x == 4) {
+		if (x == 4) {//right
 			pac_pos= 2;
 
 			if (shape.i < 21 && board[shape.i + 1][shape.j] != 4) {
@@ -939,7 +864,7 @@ function UpdatePosition() {
 
 			}
 		}
-		if(board2[shape.i][shape.j] == 5){
+		if(board2[shape.i][shape.j] == 5){//enemy colision
 			lifepool--;
 			score-=10
 			var temp=findRandomEmptyCell(board);
@@ -970,6 +895,8 @@ function UpdatePosition() {
 
 		}
 		var timenow=new Date();
+
+		//display a "medical pill" every 20 sec 
 		if(Math.floor((timenow-timepill)/1000)==20){
 			var temp=findRandomEmptyCell(board);
 			board[temp[0]][temp[1]]=8;
@@ -978,6 +905,7 @@ function UpdatePosition() {
 		if(Math.floor((timenow-grim_time)/1000)==1){
 			board2[grimpos.i][grimpos.j]=0;
 		}
+		//grim colision
 		if(board2[shape.i][shape.j] == 69){
 			score-=100;
 			lifepool--
@@ -985,20 +913,25 @@ function UpdatePosition() {
 			shape.i=temp[0];
 			shape.j=temp[1];
 		}
+		//superfood colision
 		if(board2[shape.i][shape.j] == 10){
 			score+=50;
 			board2[shape.i][shape.j]=0
 			window.clearInterval(interval2);
 		}
+		//medical pill colision
 		if(board[shape.i][shape.j] == 8){
 			lifepool++;
 		}
+		//normal ball
 		if (board[shape.i][shape.j] == 1) {
 			score+=5;
 		}
+		//megic ball 
 		else if (board[shape.i][shape.j] == 1.1) {
 			score+=15;
 		}
+		//epic ball
 		else if (board[shape.i][shape.j] == 1.2) {
 			score+=25;
 		}
@@ -1010,6 +943,7 @@ function UpdatePosition() {
 		if (score >= 20 && time_elapsed <= 10) {
 			pac_color = "green";
 		}
+
 		if(lifepool<=0){
 			Draw();
 			window.clearInterval(interval);
@@ -1025,6 +959,7 @@ function UpdatePosition() {
 			Draw();
 
 		}
+
 		if (game_time<=0) {
 			Draw();
 			window.clearInterval(interval);
@@ -1050,13 +985,14 @@ function UpdatePosition() {
 	}	
 }
 
+
 function UpdatePositionsuperfood() {
 		if(!isPaused){
 		board2[superfoodpos.i][superfoodpos.j] = 0;
 		var bool=true
 		while(bool){
 			var x = Math.floor(Math.random() * 4)+1;
-			if (x == 1) {
+			if (x == 1) {//up
 				if (superfoodpos.j > 0 && board[superfoodpos.i][superfoodpos.j - 1] != 4
 					&& board2[superfoodpos.i][superfoodpos.j - 1] != 5 && board2[superfoodpos.i][superfoodpos.j - 1] != 69) {
 					superfoodpos.j--;
@@ -1064,7 +1000,7 @@ function UpdatePositionsuperfood() {
 					bool=false;
 				}
 			}
-			if (x == 2) {
+			if (x == 2) {//down
 				 if (superfoodpos.j < 18 && board[superfoodpos.i][superfoodpos.j + 1] != 4
 					&& board2[superfoodpos.i][superfoodpos.j + 1] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
 					superfoodpos.j++;
@@ -1072,8 +1008,7 @@ function UpdatePositionsuperfood() {
 					bool=false;
 				}
 			}
-			if (x == 3) {
-
+			if (x == 3) {//left
 				if (superfoodpos.i > 0 && board[superfoodpos.i - 1][superfoodpos.j] != 4
 					 && board2[superfoodpos.i - 1][superfoodpos.j] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
 					superfoodpos.i--;
@@ -1081,7 +1016,7 @@ function UpdatePositionsuperfood() {
 					bool=false;
 				}
 			}
-			if (x == 4) {
+			if (x == 4) {//right
 
 				if (superfoodpos.i < 21 && board[superfoodpos.i + 1][superfoodpos.j] != 4
 					&& board2[superfoodpos.i + 1][superfoodpos.j] != 5 && board2[superfoodpos.i][superfoodpos.j + 1] != 69) {
@@ -1120,42 +1055,7 @@ function UpdateEnemyPosition(){
 		steptime = new Date();
 	}	
 }
-function moveEnemyX(enemyposX,coin){
-	board2[enemyposX.i][enemyposX.j] = 0;
-	var x=getBestMove(enemyposX,coin);
-	enemyposX.ib=enemyposX.i;
-	enemyposX.jb=enemyposX.j;
-	if (x == 1) {
-		if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4) {
-			enemyposX.j--;
-			
-		}
-	}
-	if (x == 2) {
-		if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4) {
-			enemyposX.j++;
-			
-		}
-	}
-	if (x == 3) {
 
-		if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4) {
-			enemyposX.i--;
-			
-		}
-	}
-	if (x == 4) {
-
-		if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4) {
-			enemyposX.i++;
-			
-		}
-	}
-
-
-
-	board2[enemyposX.i][enemyposX.j]=5
-}
 function moveEnemyX2(enemyposX){
 	board2[enemyposX.i][enemyposX.j]=0
 	var temp=astar(enemyposX)
@@ -1163,6 +1063,8 @@ function moveEnemyX2(enemyposX){
 	enemyposX.j=temp.j
 	board2[enemyposX.i][enemyposX.j]=5
 }
+
+//algorithm for chase 
 function astar(enemyposX){
 	var openlist= new PriorityQueue();
 	enemyposX.val=hurstic(enemyposX);
@@ -1226,6 +1128,7 @@ function hurstic(enemyposX){
 	return Math.abs(enemyposX.i-shape.i) + Math.abs(enemyposX.j-shape.j);
 }
 function neighbors(pos,openlist,closelist){
+	//up
 	if (pos.j > 0 && board[pos.i][pos.j - 1] != 4 
 		&& board2[pos.i][pos.j - 1] != 5 && board2[pos.i][pos.j - 1] != 69){
 		var newpos=new Object();
@@ -1239,6 +1142,7 @@ function neighbors(pos,openlist,closelist){
 			if(openlist.notin(newpos)){
 				openlist.push(newpos)}}
 	}
+	//down
 	if (pos.j < 18 && board[pos.i][pos.j + 1] != 4 
 		&& board2[pos.i][pos.j + 1] != 5 && board2[pos.i][pos.j + 1] != 69){
 		var newpos=new Object();
@@ -1252,6 +1156,7 @@ function neighbors(pos,openlist,closelist){
 			if(openlist.notin(newpos)){
 				openlist.push(newpos)}}
 	}
+	//left
 	if (pos.i > 0 && board[pos.i-1][pos.j] != 4 
 		&& board2[pos.i-1][pos.j] != 5 && board2[pos.i-1][pos.j] != 69){
 		var newpos=new Object();
@@ -1265,6 +1170,7 @@ function neighbors(pos,openlist,closelist){
 			if(openlist.notin(newpos)){
 				openlist.push(newpos)}}
 	}
+	//right
 	if (pos.i < 21 && board[pos.i+1][pos.j] != 4 
 		&& board2[pos.i+1][pos.j] != 5&& board2[pos.i+1][pos.j] != 69){
 		var newpos=new Object();
@@ -1280,51 +1186,7 @@ function neighbors(pos,openlist,closelist){
 	}
 }
 
-function getBestMove(enemyposX,coin){
-	var a=[100,100,100,100];
-	var b=0;
-	var c=100;
-	if (enemyposX.j > 0 && board[enemyposX.i][enemyposX.j - 1] != 4 && enemyposX.j-1 !=enemyposX.jb
-		&& board2[enemyposX.i][enemyposX.j - 1] != 5){
-		if(!(enemyposX.j-1==3 && enemyposX.i==10)){	
-		if(coin==0){
-			a[0]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j-1)-shape.j);}
-		if(coin==1){
-			a[0]=((enemyposX.i-shape.i)**2 + ((enemyposX.j-1)-shape.j)**2)**0.5;
-		}
-		if(a[0]<c) {b=1;c=a[0]}}
-	}
-	if (enemyposX.j < 18 && board[enemyposX.i][enemyposX.j + 1] != 4 && enemyposX.j+1 !=enemyposX.jb
-		&& board2[enemyposX.i][enemyposX.j + 1] != 5) {
-		if(!(enemyposX.j+1==15 && enemyposX.i==10)){
-			if(coin==0){
-				a[1]=Math.abs(enemyposX.i-shape.i) + Math.abs((enemyposX.j+1)-shape.j);}
-			if(coin==1){
-				a[1]=((enemyposX.i-shape.i)**2 + ((enemyposX.j+1)-shape.j)**2)**0.5;
-			}
-		if(a[1]<c) {b=2;c=a[1]}}
-	}
-	if (enemyposX.i > 0 && board[enemyposX.i - 1][enemyposX.j] != 4 && enemyposX.i-1 !=enemyposX.ib
-		&& board2[enemyposX.i-1][enemyposX.j] != 5) {
-			if(coin==0){
-				a[2]=Math.abs((enemyposX.i-1)-shape.i) + Math.abs(enemyposX.j-shape.j);}
-			if(coin==1){
-				a[2]=(((enemyposX.i-1)-shape.i)**2 + (enemyposX.j-shape.j)**2)**0.5;
-			}
-		
-		if(a[2]<c) {b=3;c=a[2]}
-	}
-	if (enemyposX.i < 21 && board[enemyposX.i + 1][enemyposX.j] != 4 && enemyposX.i+1 !=enemyposX.ib
-		&& board2[enemyposX.i+1][enemyposX.j] != 5) {
-			if(coin==0){
-				a[3]=Math.abs((enemyposX.i+1)-shape.i) + Math.abs(enemyposX.j-shape.j);}
-			if(coin==1){
-				a[3]=(((enemyposX.i+1)-shape.i)**2 + (enemyposX.j-shape.j)**2)**0.5;
-			}
-		if(a[3]<c) {b=4;c=a[3]};
-	}
-	return b
-}
+
 
 
 
