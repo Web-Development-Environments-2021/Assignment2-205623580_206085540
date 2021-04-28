@@ -43,6 +43,7 @@ var right_key=39;
 var timepill;
 var keyboz=false;
 
+
 function randomVal(){
 	var select = document.getElementById('dotg');
     var items = select.getElementsByTagName('option');
